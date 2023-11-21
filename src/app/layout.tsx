@@ -1,7 +1,10 @@
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin']
+})
 
 export default function RootLayout({
   children,
@@ -9,8 +12,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt-BR">
+      <body className={poppins.className}>{children}</body>
     </html>
   )
 }
