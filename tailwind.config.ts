@@ -8,11 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      colors: {
+        primary: '#F13A00',
+        background: '#FFE3DA',
+        'pag-active': '#FF8B02',
+        overlay: 'rgba(0,0,0,0.5)'
       },
+      maxWidth: {
+        '1920': '1920px'
+      }
     },
   },
   plugins: [],

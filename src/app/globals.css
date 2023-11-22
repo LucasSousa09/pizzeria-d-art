@@ -7,5 +7,14 @@
 }
 
 body {
+    .swiper-pagination-bullet-active {
+        background-color: #FF8B02 !important;
+   }
+   .swiper-pagination-bullet {
+        margin-right: 10px !important;
+   }
 
+   --swiper-pagination-bullet-size: 24px;
+   --swiper-pagination-bullet-inactive-color: #F13A00;
+   --swiper-pagination-bullet-inactive-opacity: 0.7;
 }
