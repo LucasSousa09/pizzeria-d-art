@@ -1,11 +1,10 @@
-import { Poppins } from 'next/font/google'
 import './globals.css'
-import { Header } from './components/Header'
 
-const poppins = Poppins({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin']
-})
+import { HeaderContainer } from './components/HeaderContainer'
+import { Footer } from './components/Footer'
+
+import { poppins } from './fonts'
+import { Cart } from './components/Cart'
 
 export default function RootLayout({
   children,
@@ -14,10 +13,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={`${poppins.className} flex items-center justify-center bg-background`} >
+      <body className={`${poppins.className}  flex items-center justify-center bg-background`} >
         <div className="max-w-1920 w-full">
-          <Header />
+          <HeaderContainer />
+          <Cart />
           {children}
+          <Footer />
         </div>
       </body>
     </html>

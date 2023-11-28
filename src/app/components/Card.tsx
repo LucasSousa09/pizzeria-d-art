@@ -15,9 +15,9 @@ export function Card() {
                 <strong className="text-xl font-medium text-end">32,99R$</strong>
 
                 <span className="text-xl font-medium">Quantidade</span>
-                <Quantity />
+                <Quantity size='default'/>
             </div>
-            <button className="bg-white text-primary text-lg font-medium mt-4 rounded-[4px] py-3 w-full">Adicionar ao Carrinho</button>
+            <button className="bg-white text-primary text-lg font-medium mt-4 rounded py-3 w-full">Adicionar ao Carrinho</button>
         </div>
     )
 }
