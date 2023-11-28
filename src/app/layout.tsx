@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={`${poppins.className}  flex items-center justify-center bg-background`} >
+      <body className={`${poppins.className} overflow-x-hidden flex items-center justify-center bg-background`} >
         <div className="max-w-1920 w-full">
           <HeaderContainer />
           <Cart />
