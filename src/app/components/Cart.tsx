@@ -18,7 +18,7 @@ export function Cart(){
                 </div>
             </div>
 
-            <footer className="w-[calc((100%)-16px)] mx-2 border-t-white border-t-[1px] px-5 pt-4 pb-5">
+            <footer className="w-[calc((100%)-16px)] mx-2 border-t-white border-t px-5 pt-4 pb-5">
                 <div className="flex justify-between items-center">
                     <strong className="text-xl">Preço Total</strong>
                     <strong className="text-xl">131,96</strong>

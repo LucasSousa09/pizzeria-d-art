@@ -7,7 +7,7 @@ import pizzaImg from '../assets/Pizza_7.png'
 
 export function CartPizza(){
     return (
-        <div className="flex gap-5 mx-2 p-5 border-t-white border-t-[1px]">
+        <div className="flex gap-5 mx-2 p-5 border-t-white border-t">
             <Image src={pizzaImg.src} alt="" height={100} width={100} />
             <div>
                 <strong className="text-lg">Pizza de Queijo e Cenoura</strong>
