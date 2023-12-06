@@ -5,11 +5,12 @@ type InputProps = {
     id: string,
     onChange: ChangeHandler,
     onBlur: ChangeHandler,
-    name: string
+    name: string,
+    type?: 'text' | 'number'
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>(({id, name, onBlur, onChange, type = 'text'}, ref) => {
     return(
-            <input {...props} ref={ref} className="block p-2 text-primary w-full bg-background border border-primary rounded h-12" type="text" />
+        <input id={id} name={name} onBlur={onBlur} onChange={onChange} type={type} ref={ref} className="block p-2 text-primary w-full bg-background border border-primary rounded h-12" />
     )
 })

@@ -1,35 +1,64 @@
 'use client'
 
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
 import { useForm, SubmitHandler } from "react-hook-form"
 
 import { Input } from "@/app/components/Input";
 import { InputBox } from "@/app/components/InputBox";
 import { Label } from "@/app/components/Label";
 import { TextArea } from "@/app/components/TextArea";
+import { useEffect } from 'react';
 
-type FormProps = {
-    name: string,
-    cpf: string,
-    phone: string,
-    email: string,
-    street: string,
-    district: string,
-    cep: string,
-    number: string,
-    complement: string,
-    city: string,
-    uf: string,
-    reference: string,
-}
+const UserInfoSchema = zod.object({
+    name: zod.string()
+            .min(3, 'O Nome deve conter pelo menos 3 letras'),
+    cpf: zod.string()
+            .min(11, 'O CPF deve conter no minímo 11 digitos')
+            .max(11, 'O CPF deve conter no máximo 11 digitos')
+            .regex(/^\d+$/, 'O CPF deve conter apenas números'),
+    phone: zod.string()
+            .min(11, 'O Telefone deve conter no minímo 11 digitos')
+            .max(11, 'O Telefone deve conter no máximo 11 digitos')
+            .regex(/^\d+$/, 'O Telefone deve conter apenas números'),
+    email: zod.string()
+            .email('Por favor digite um email válido'),
+    street: zod.string()
+                .min(3, 'A Rua deve conter pelo menos 3 letras'),
+    district: zod.string()
+                .min(3, 'O Bairro deve conter pelo menos 3 letras'),
+    zipCode: zod.string()
+                .min(8, 'O CEP deve conter no minímo 8 digitos')
+                .max(8, 'O CEP deve conter no máximo 8 digitos')
+                .regex(/^\d+$/, 'O CEP deve conter apenas números'),
+    houseNumber: zod.number()
+                .nonnegative('O número não deve ser negativo'),
+    complement: zod.string(),
+    city: zod.string()
+                .min(3, 'A Cidade deve conter pelo menos 3 letras'),
+    state: zod.string()
+                .min(2, 'A UF deve conter pelo menos 2 letras')
+                .max(2, 'A UF deve conter no máximo 2 letras'),
+    reference: zod.string(),     
+})
+
+type UserInfoData = zod.infer<typeof UserInfoSchema>
 
 export default function EditProfile(){
     const {
         register,
         handleSubmit,
-    } = useForm<FormProps>()
+        formState
+    } = useForm<UserInfoData>({
+        resolver: zodResolver(UserInfoSchema)
+    })
 
-      const onSubmit: SubmitHandler<FormProps> = (data) => console.log(data)
-    
+      const onSubmit: SubmitHandler<UserInfoData> = (data) => console.log(data)
+      
+      useEffect(() => {
+        console.log(formState.errors)
+      }, [formState.errors])
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center gap-32'>
             <div className='mt-7 grid grid-rows-4 grid-flow-col max-w-[1321px] gap-x-[60px]'>
@@ -65,13 +94,13 @@ export default function EditProfile(){
 
                 <InputBox>
                     <Label idFor="cep" text="Cep" />
-                    <Input id="cep" {...register("cep")} />
+                    <Input id="cep" {...register("zipCode")} />
                 </InputBox>
 
                 <div className="flex gap-7">
                     <InputBox size="sm">
-                        <Label idFor="number" text="Número" />
-                        <Input id="number" {...register("number")} />
+                        <Label idFor="houseNumber" text="Número" />
+                        <Input id="houseNumber" type="number" {...register("houseNumber", { valueAsNumber: true })} />
                     </InputBox>
 
                     <InputBox>
@@ -86,13 +115,13 @@ export default function EditProfile(){
                 </InputBox>
 
                 <InputBox size="xs">
-                    <Label idFor="uf" text="UF" />
-                    <Input id="uf" {...register("uf")} />
+                    <Label idFor="state" text="UF" />
+                    <Input id="state" {...register("state")} />
                 </InputBox>
 
                 <InputBox rowSpan>
                     <Label idFor="reference" text="Ponto de referêcia" />
-                    <TextArea id="reference" />
+                    <TextArea id="reference" {...register("reference")} />
                 </InputBox>
             </div>
 

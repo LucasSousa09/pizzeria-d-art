@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
     "@phosphor-icons/react": "^2.0.14",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",
-    "swiper": "^11.0.5"
+    "swiper": "^11.0.5",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",
