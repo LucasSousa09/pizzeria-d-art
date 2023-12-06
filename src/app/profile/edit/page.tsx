@@ -3,6 +3,9 @@
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useForm, SubmitHandler } from "react-hook-form"
 
 import { Input } from "@/app/components/Input";
@@ -57,11 +60,17 @@ export default function EditProfile(){
       const onSubmit: SubmitHandler<UserInfoData> = (data) => console.log(data)
       
       useEffect(() => {
-        console.log(formState.errors)
+        const currentError = Object.keys(formState.errors)[0]
+        const errorMessage = formState.errors[currentError as keyof UserInfoData]?.message
+
+        toast.error(errorMessage)
+
       }, [formState.errors])
+      
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center gap-32'>
-            <div className='mt-7 grid grid-rows-4 grid-flow-col max-w-[1321px] gap-x-[60px]'>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center'>
+            <ToastContainer position='bottom-right' theme='colored' />
+            <div className='mt-16 grid grid-rows-4 grid-flow-col max-w-[1321px] gap-x-[60px]'>
                 <InputBox>
                     <Label idFor="name" text="Nome" />
                     <Input  id="name" {...register("name")} />
@@ -126,7 +135,7 @@ export default function EditProfile(){
             </div>
 
 
-            <button type="submit" className="bg-primary text-white font-bold text-2xl px-4 py-3 rounded w-fit">Salvar Alterações</button>
+            <button type="submit" className="mt-32 bg-primary text-white font-bold text-2xl px-4 py-3 rounded w-fit">Salvar Alterações</button>
         </form>
     )
 }
