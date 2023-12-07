@@ -8,23 +8,26 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useForm, SubmitHandler } from "react-hook-form"
 
-import { Input } from "@/app/components/Input";
-import { InputBox } from "@/app/components/InputBox";
-import { Label } from "@/app/components/Label";
-import { TextArea } from "@/app/components/TextArea";
+import { InputBox } from "@/app/components/FormInputs/InputBox";
+import { Label } from "@/app/components/FormInputs/Label";
+import { Input } from "@/app/components/FormInputs/Input";
+import { CpfInput } from '@/app/components/FormInputs/CpfInput';
+import { PhoneInput } from '@/app/components/FormInputs/PhoneInput';
+import { ZipCodeInput } from '@/app/components/FormInputs/ZipCodeInput';
+import { TextArea } from "@/app/components/FormInputs/TextArea";
 import { useEffect } from 'react';
 
 const UserInfoSchema = zod.object({
     name: zod.string()
             .min(3, 'O Nome deve conter pelo menos 3 letras'),
     cpf: zod.string()
-            .min(11, 'O CPF deve conter no minímo 11 digitos')
-            .max(11, 'O CPF deve conter no máximo 11 digitos')
-            .regex(/^\d+$/, 'O CPF deve conter apenas números'),
+            .min(14, 'O CPF deve conter no minímo 11 digitos')
+            .max(14, 'O CPF deve conter no máximo 11 digitos')
+            .regex(/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/, 'O CPF está incompleto'),
     phone: zod.string()
-            .min(11, 'O Telefone deve conter no minímo 11 digitos')
-            .max(11, 'O Telefone deve conter no máximo 11 digitos')
-            .regex(/^\d+$/, 'O Telefone deve conter apenas números'),
+            .min(14, 'O Telefone deve conter no minímo 11 digitos')
+            .max(14, 'O Telefone deve conter no máximo 11 digitos')
+            .regex(/^\([0-9][0-9]\)[0-9]{5}\-[0-9]{4}$/, 'O Telefone está incompleto'),
     email: zod.string()
             .email('Por favor digite um email válido'),
     street: zod.string()
@@ -32,9 +35,9 @@ const UserInfoSchema = zod.object({
     district: zod.string()
                 .min(3, 'O Bairro deve conter pelo menos 3 letras'),
     zipCode: zod.string()
-                .min(8, 'O CEP deve conter no minímo 8 digitos')
-                .max(8, 'O CEP deve conter no máximo 8 digitos')
-                .regex(/^\d+$/, 'O CEP deve conter apenas números'),
+                .min(9, 'O CEP deve conter no minímo 8 digitos')
+                .max(9, 'O CEP deve conter no máximo 8 digitos')
+                .regex(/^[0-9]{5}\-[0-9]{3}$/, 'O CEP está incompleto'),
     houseNumber: zod.number()
                 .nonnegative('O número não deve ser negativo'),
     complement: zod.string(),
@@ -78,12 +81,12 @@ export default function EditProfile(){
 
                 <InputBox>
                     <Label idFor="cpf" text="Cpf" />
-                    <Input id="cpf" {...register("cpf")} />
+                    <CpfInput id="cpf" {...register("cpf")} />
                 </InputBox>
 
                 <InputBox>
                     <Label idFor="phone" text="Telefone" />
-                    <Input id="phone" {...register("phone")} />
+                    <PhoneInput id="phone" {...register("phone")} />
                 </InputBox>
 
                 <InputBox>
@@ -102,8 +105,8 @@ export default function EditProfile(){
                 </InputBox>
 
                 <InputBox>
-                    <Label idFor="cep" text="Cep" />
-                    <Input id="cep" {...register("zipCode")} />
+                    <Label idFor="zipCode" text="Cep" />
+                    <ZipCodeInput id="zipCode" {...register("zipCode")}/> 
                 </InputBox>
 
                 <div className="flex gap-7">
