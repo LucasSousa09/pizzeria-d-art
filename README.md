@@ -7,3 +7,6 @@ A pizzaria dos seus sonhos agora on-line.
 - TailwindCSS
 - Swiper
 - Phosphor React
+- React Hook Form
+- React Imask
+- React Toastify
