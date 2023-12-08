@@ -5,7 +5,7 @@ import { CartPizza } from './CartPizza'
 
 export function Cart(){
     return (
-        <div className="absolute top-0 bottom-0 right-0 z-50 flex flex-col justify-between items-center bg-primary text-white w-[440px] translate-x-full ">
+        <div className="absolute top-0 bottom-0 right-0 z-50 flex flex-col justify-between items-center bg-primary text-white w-[440px] translate-x-full">
             <div className="relative w-full">
                 <button className="absolute top-2 right-2">
                     <X weight='bold' size={32} />
