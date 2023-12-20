@@ -5,6 +5,9 @@ import logoImg from "../assets/Logo.png"
 
 import { ShoppingCart, UserCircle } from '@phosphor-icons/react/dist/ssr'
 
+import { useContext } from "react";
+import { CartContext } from "../contexts/CartContextProvider";
+
 let isLogged = false
 
 interface HeaderProps {
@@ -12,6 +15,8 @@ interface HeaderProps {
 }
 
 export function Header({pathname}: HeaderProps){
+    const { setOpenCart } = useContext(CartContext)
+
     return (
         <>
             <Link href="/">
@@ -25,7 +30,9 @@ export function Header({pathname}: HeaderProps){
                         <Link className="font-medium text-2xl text-white bg-primary rounded-full px-[18px] py-3" href='login'>Login</Link>
                     )
                 }
-                <ShoppingCart className="text-primary" weight="fill" height={57} width={57}  />
+                <button onClick={() => setOpenCart(true)}>
+                    <ShoppingCart className="text-primary" weight="fill" height={57} width={57}  />
+                </button>
             </div>
         </>
     )

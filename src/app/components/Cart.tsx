@@ -3,11 +3,16 @@
 import { X } from '@phosphor-icons/react'
 import { CartPizza } from './CartPizza'
 
+import { useContext } from 'react'
+import { CartContext } from '../contexts/CartContextProvider'
+
 export function Cart(){
+    const { openCart, setOpenCart } = useContext(CartContext)
+
     return (
-        <div className="absolute top-0 bottom-0 right-0 z-50 flex flex-col justify-between items-center bg-primary text-white w-[440px] translate-x-full">
+        <div className={`fixed top-0 bottom-0 right-0 z-50 flex flex-col justify-between items-center bg-primary text-white w-[440px] ${ !openCart ? 'translate-x-full' : 'translate-x-0' } transition-all`}>
             <div className="relative w-full">
-                <button className="absolute top-2 right-2">
+                <button onClick={() => setOpenCart(false)} className="absolute top-2 right-2">
                     <X weight='bold' size={32} />
                 </button>
 

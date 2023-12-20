@@ -16,7 +16,7 @@ export async function CardContainer(){
             pizzas.length > 0 ?
             pizzas.map(pizza => {
                 return (
-                    <Card pizzaName={pizza.name} price={pizza.price} pizzaImg={pizza.img}  />
+                    <Card key={pizza.id} pizzaName={pizza.name} price={pizza.price} pizzaImg={pizza.img}  />
                 )
             }) :
             <strong>Não há pizzas cadastradas</strong>
