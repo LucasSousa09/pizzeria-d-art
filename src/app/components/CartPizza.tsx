@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { Quantity } from "./Quantity";
 
-import pizzaImg from '../assets/Pizza_7.png'
 import { Separator } from "./Separator";
 
 type CartPizzaProps = {
@@ -14,7 +13,7 @@ export function CartPizza({onCheckout = false}: CartPizzaProps){
     return (
         <>
             <div className={`flex gap-5 mx-2 p-5 ${!onCheckout && 'border-t'} ${!onCheckout && 'border-t-white'}`}>
-                <Image src={pizzaImg.src} alt="" height={100} width={100} />
+                {/* <Image src={pizzaImg.src} alt="" height={100} width={100} /> */}
                 <div>
                     <strong className="text-lg">Pizza de Queijo e Cenoura</strong>
                     <div className="grid grid-cols-2 gap-y-1 mt-3">
