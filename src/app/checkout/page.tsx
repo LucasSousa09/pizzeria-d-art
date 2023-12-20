@@ -65,10 +65,10 @@ export default function CheckoutPage(){
       const onSubmit: SubmitHandler<CheckoutData> = (data) => console.log(data)
 
     return (
-        <div className="flex flex-col items-center justify-start h-[calc(100vh-250px)]">
+        <div className="flex flex-col items-center justify-start h-[calc(100vh-104px)]">
             <h1 className="mt-12 text-5xl text-primary font-bold">Checkout</h1>
             
-            <form className="grid grid-cols-[minmax(0,1fr)_440px] grid-rows-[440px_240px] grid-flow-col gap-x-16 items-center justify-center max-w-[1416px]" >
+            <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-[minmax(0,1fr)_440px] grid-rows-[440px_240px] grid-flow-col gap-x-16 items-center justify-center max-w-[1416px]" >
                 <div>
                     <strong className="flex font-medium text-2xl text-primary mb-2 leading-normal">Endereço</strong>
                     <div className="bg-primary rounded max-w-[916px] pt-[-4px] px-7 pb-7 grid grid-cols-2 grid-rows-3 grid-flow-col gap-x-16 mb-4">

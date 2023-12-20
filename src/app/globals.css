@@ -16,8 +16,9 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
      -webkit-text-fill-color: #F13A00;
-     background-color: #1b1b6c;
-     transition: background-color 5000s ease-in-out 0s;
+     -webkit-box-shadow: 0 0 0 30px #FFE3DA inset !important;
+     /* background-color: #FFE3DA;
+     transition: background-color 5000s ease-in-out 0s; */
 }
 
 body {
