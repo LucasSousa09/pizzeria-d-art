@@ -1,18 +1,23 @@
 import Image from "next/image";
 import { Quantity } from "./Quantity";
+import { formatter } from "../lib/formatter";
 
-import pizzaImg from '../assets/Pizza_7.png'
+type CardProps = {
+    pizzaName: string,
+    price: number,
+    pizzaImg: string,
+}
 
-export function Card() {
+export function Card({ pizzaName, price, pizzaImg }: CardProps) {
     return (
         <div className="bg-primary flex flex-col items-center max-w-[304px] rounded-md text-white px-[23px] py-5">
-            <Image src={pizzaImg.src} alt="" width={240} height={240}/>
+            <Image src={pizzaImg} alt="" width={240} height={240}/>
             
-            <strong className="font-bold text-[28px] mt-3">Pizza de cenouras</strong>
+            <strong className="font-bold text-[26px] mt-3 whitespace-nowrap truncate max-w-[258px]">{pizzaName}</strong>
 
             <div className="grid grid-cols-2 gap-y-1 mt-4">
                 <span className="text-xl font-medium">Preço</span>
-                <strong className="text-xl font-medium text-end">32,99R$</strong>
+                <strong className="text-xl font-medium text-end">{formatter.format(price/100)}</strong>
 
                 <span className="text-xl font-medium">Quantidade</span>
                 <Quantity size='default'/>
