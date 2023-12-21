@@ -20,8 +20,6 @@ export function Slider(){
             spaceBetween={0}
             slidesPerView={1}
             pagination={{ clickable: true }}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
         >
             <SwiperSlide className='relative'>
                 <SliderSlide author='Rodrigues Lucas' text='"Mais do que uma pizza, uma obra de arte"' bannerImg={bannerImg.src} />

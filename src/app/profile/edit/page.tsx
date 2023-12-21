@@ -8,13 +8,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useForm, SubmitHandler } from "react-hook-form"
 
-import { InputBox } from "@/app/components/FormInputs/InputBox";
-import { Label } from "@/app/components/FormInputs/Label";
-import { Input } from "@/app/components/FormInputs/Input";
-import { CpfInput } from '@/app/components/FormInputs/CpfInput';
-import { PhoneInput } from '@/app/components/FormInputs/PhoneInput';
-import { ZipCodeInput } from '@/app/components/FormInputs/ZipCodeInput';
-import { TextArea } from "@/app/components/FormInputs/TextArea";
+import { InputBox } from "../../../components/FormInputs/InputBox";
+import { Label } from "../../../components/FormInputs/Label";
+import { Input } from "../../../components/FormInputs/Input";
+import { CpfInput } from '../../../components/FormInputs/CpfInput';
+import { PhoneInput } from '../../../components/FormInputs/PhoneInput';
+import { ZipCodeInput } from '../../../components/FormInputs/ZipCodeInput';
+import { TextArea } from "../../../components/FormInputs/TextArea";
 import { useEffect } from 'react';
 
 const UserInfoSchema = zod.object({

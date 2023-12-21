@@ -1,7 +1,7 @@
 import { PencilSimple } from "@phosphor-icons/react/dist/ssr";
-import { ProfileBox } from "../components/ProfileBox";
+import { ProfileBox } from "../../components/ProfileBox";
 import Link from "next/link";
-import { PurchasedItem } from "../components/PurchasedItem";
+import { PurchasedItem } from "../../components/PurchasedItem";
 
 export default function Profile(){
     return (

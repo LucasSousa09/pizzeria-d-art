@@ -1,6 +1,12 @@
+'use client'
+
 import Image from "next/image";
+import { useContext, useState } from "react";
+
 import { Quantity } from "./Quantity";
+
 import { formatter } from "../lib/formatter";
+import { CartContext } from "@/contexts/CartContextProvider";
 
 type CardProps = {
     pizzaName: string,
@@ -9,6 +15,10 @@ type CardProps = {
 }
 
 export function Card({ pizzaName, price, pizzaImg }: CardProps) {
+    const [ quantity, setQuantity ] = useState(0)
+
+    const { addPizzaToCart } = useContext(CartContext)
+
     return (
         <div className="bg-primary flex flex-col items-center max-w-[304px] rounded-md text-white px-[23px] py-5">
             <Image src={pizzaImg} alt="" width={240} height={240}/>
@@ -20,9 +30,9 @@ export function Card({ pizzaName, price, pizzaImg }: CardProps) {
                 <strong className="text-xl font-medium text-end">{formatter.format(price/100)}</strong>
 
                 <span className="text-xl font-medium">Quantidade</span>
-                <Quantity size='default'/>
+                <Quantity quantity={quantity} setQuantity={setQuantity} size='default'/>
             </div>
-            <button className="bg-white text-primary text-lg font-medium mt-4 rounded py-3 w-full">Adicionar ao Carrinho</button>
+            <button onClick={() => addPizzaToCart({pizzaName, pizzaImg, price, quantity})} className="bg-white text-primary text-lg font-medium mt-4 rounded py-3 w-full">Adicionar ao Carrinho</button>
         </div>
     )
 }

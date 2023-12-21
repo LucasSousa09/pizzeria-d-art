@@ -1,11 +1,11 @@
 import './globals.css'
 
-import { HeaderContainer } from './components/HeaderContainer'
-import { Footer } from './components/Footer'
+import { HeaderContainer } from '../components/HeaderContainer'
+import { Footer } from '../components/Footer'
 
 import { poppins } from './fonts'
-import { Cart } from './components/Cart'
-import { CartContextProvider } from './contexts/CartContextProvider'
+import { Cart } from '../components/Cart'
+import { CartContextProvider } from '../contexts/CartContextProvider'
 
 export default function RootLayout({
   children,

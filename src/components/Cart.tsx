@@ -1,13 +1,13 @@
 'use client'
 
-import { X } from '@phosphor-icons/react'
+import { X, SmileyXEyes } from '@phosphor-icons/react'
 import { CartPizza } from './CartPizza'
 
 import { useContext } from 'react'
 import { CartContext } from '../contexts/CartContextProvider'
 
 export function Cart(){
-    const { openCart, setOpenCart } = useContext(CartContext)
+    const { openCart, setOpenCart, cart } = useContext(CartContext)
 
     return (
         <div className={`fixed top-0 bottom-0 right-0 z-50 flex flex-col justify-between items-center bg-primary text-white w-[440px] ${ !openCart ? 'translate-x-full' : 'translate-x-0' } transition-all`}>
@@ -17,9 +17,20 @@ export function Cart(){
                 </button>
 
                 <div className="mt-12">
-                    <CartPizza />
-                    <CartPizza />
-                    <CartPizza />
+                    {
+                        cart.length > 0 ?
+                        cart.map(cartPizza => <CartPizza 
+                                                pizzaImg={cartPizza.pizzaImg} 
+                                                pizzaName={cartPizza.pizzaName} 
+                                                price={cartPizza.price} 
+                                                quantity={cartPizza.quantity} 
+                                                key={cartPizza.pizzaName}
+                                              />):
+                        <div className="flex flex-col items-center justify-center gap-4 pt-16   ">
+                            <strong className="font-medium text-xl">Seu carrinho não contem items</strong>
+                            <SmileyXEyes size={40} />
+                        </div>
+                    }
                 </div>
             </div>
 

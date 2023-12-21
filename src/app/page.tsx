@@ -1,5 +1,5 @@
-import { CardContainer } from "./components/CardContainer";
-import { Slider } from "./components/Slider";
+import { CardContainer } from "../components/CardContainer";
+import { Slider } from "../components/Slider";
 
 import { CaretDoubleDown } from '@phosphor-icons/react/dist/ssr'
 
