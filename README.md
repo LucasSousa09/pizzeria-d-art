@@ -12,3 +12,5 @@ A pizzaria dos seus sonhos agora on-line.
 - React Hook Form
 - React Imask
 - React Toastify
+
+*obs: Sem responsividade, tamanho atual 1920px de largura*
