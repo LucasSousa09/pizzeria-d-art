@@ -13,7 +13,7 @@ export function SliderSlide({ bannerImg, text, author }: SliderSlideProps){
                 <strong className="text-background text-6xl font-medium">{text}</strong>
                 <span className="text-background text-4xl font-medium">Rodrigues, Lucas</span>
             </div>
-            <Image className="max-h-[600px] object-cover" src={bannerImg} alt="" height={600} width={1920}/>
+            <Image className="max-h-[600px] h-[600px] object-cover" src={bannerImg} alt="" height={600} width={1920}/>
         </>
     )
 }

@@ -5,6 +5,7 @@ import { CartPizza } from './CartPizza'
 
 import { useContext } from 'react'
 import { CartContext } from '../contexts/CartContextProvider'
+import { formatter } from '@/lib/formatter'
 
 export function Cart(){
     const { openCart, setOpenCart, cart } = useContext(CartContext)
@@ -37,7 +38,7 @@ export function Cart(){
             <footer className="w-[calc((100%)-16px)] mx-2 border-t-white border-t px-5 pt-4 pb-5">
                 <div className="flex justify-between items-center">
                     <strong className="text-xl">Preço Total</strong>
-                    <strong className="text-xl">131,96</strong>
+                    <strong className="text-xl">{formatter.format(cart.reduce((cur, acc) => {return cur + (acc.quantity * acc.price / 100)},0))}</strong>
                 </div>
                 <button className="text-xl font-bold bg-white text-primary py-4 w-full mt-6 rounded">Finalizar Compra</button>
             </footer>

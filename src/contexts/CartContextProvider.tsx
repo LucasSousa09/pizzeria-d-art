@@ -9,6 +9,7 @@ type CartContextProps = {
     cart: CartItemProps[],
     addPizzaToCart: (pizza: CartItemProps) => void
     removePizzaFromCart: (pizzaName: string) => void
+    updateCartQuantity: ( pizzaName:string, quantity:number ) => void
 }
 
 type CartContextProviderProps = {
@@ -40,11 +41,20 @@ export function CartContextProvider({ children }: CartContextProviderProps){
     }
 
     function removePizzaFromCart(pizzaName: string) {
-        setCart(state => state.filter(cart => cart.pizzaName !== pizzaName))
+        setCart(state => state.filter(pizza => pizza.pizzaName !== pizzaName))
+    }
+
+    function updateCartQuantity(pizzaName:string, quantity: number){
+        setCart(state => state.map(pizza => {
+            if(pizza.pizzaName === pizzaName){
+                return {...pizza, quantity}
+            }
+            return pizza
+        }))
     }
 
     return (
-        <CartContext.Provider value={{openCart, setOpenCart, cart, addPizzaToCart, removePizzaFromCart}}>
+        <CartContext.Provider value={{openCart, setOpenCart, cart, addPizzaToCart, removePizzaFromCart, updateCartQuantity}}>
             {children}
         </CartContext.Provider>
     )

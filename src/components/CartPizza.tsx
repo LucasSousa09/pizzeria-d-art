@@ -37,10 +37,10 @@ export function CartPizza({ pizzaImg, pizzaName, price, quantity, onCheckout = f
                     </div>
                     <div className="grid grid-cols-2 gap-y-1 mt-3">
                         <span className="font-medium">Preço</span>
-                        <strong className="font-medium text-end">{formatter.format(price/100)}</strong>
+                        <strong className="font-medium text-end">{formatter.format(price/100*cartQuantity)}</strong>
 
                         <span className="font-medium">Quantidade</span>
-                        <Quantity quantity={cartQuantity} setQuantity={setCartQuantity} size='sm'/>
+                        <Quantity pizzaName={pizzaName} quantity={cartQuantity} setQuantity={setCartQuantity} size='sm'/>
                     </div>
                 </div>
             </div>
