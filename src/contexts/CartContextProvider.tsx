@@ -10,6 +10,7 @@ type CartContextProps = {
     addPizzaToCart: (pizza: CartItemProps) => void
     removePizzaFromCart: (pizzaName: string) => void
     updateCartQuantity: ( pizzaName:string, quantity:number ) => void
+    getCartFromLocalStorage: () => void
 }
 
 type CartContextProviderProps = {
@@ -30,31 +31,52 @@ export function CartContextProvider({ children }: CartContextProviderProps){
 
     const [ cart, setCart ] = useState<CartItemProps[]>([])
 
+    function getCartFromLocalStorage(){
+        const localStorageCart = localStorage.getItem('@pizza-dart:cart')
+
+        if(localStorageCart !== null){
+            setCart(JSON.parse(localStorageCart))
+        }
+    }
+
     function addPizzaToCart(pizza: CartItemProps){
         if(pizza.quantity > 0){
             const hasOnCart = cart.some(cartPizza => cartPizza.pizzaName === pizza.pizzaName)
     
             if(hasOnCart === false){
-                setCart(state => [...state, pizza])
+                setCart(state => {
+                    localStorage.setItem('@pizza-dart:cart', JSON.stringify([...state, pizza]))
+                    return [...state, pizza]
+                })
             }
         }
     }
 
     function removePizzaFromCart(pizzaName: string) {
-        setCart(state => state.filter(pizza => pizza.pizzaName !== pizzaName))
+        setCart(state => {
+            const filteredPizzas = state.filter(pizza => pizza.pizzaName !== pizzaName)
+            localStorage.setItem('@pizza-dart:cart', JSON.stringify(filteredPizzas))
+            return filteredPizzas
+        })
     }
 
     function updateCartQuantity(pizzaName:string, quantity: number){
-        setCart(state => state.map(pizza => {
-            if(pizza.pizzaName === pizzaName){
-                return {...pizza, quantity}
-            }
-            return pizza
-        }))
+        setCart(state => {
+            const updatedCart = state.map(pizza => {
+                if(pizza.pizzaName === pizzaName){
+                    return {...pizza, quantity}
+                }
+                return pizza
+            })
+            localStorage.setItem('@pizza-dart:cart', JSON.stringify(updatedCart))
+            return updatedCart        
+        }
+
+        )
     }
 
     return (
-        <CartContext.Provider value={{openCart, setOpenCart, cart, addPizzaToCart, removePizzaFromCart, updateCartQuantity}}>
+        <CartContext.Provider value={{openCart, setOpenCart, cart, addPizzaToCart, removePizzaFromCart, updateCartQuantity, getCartFromLocalStorage}}>
             {children}
         </CartContext.Provider>
     )

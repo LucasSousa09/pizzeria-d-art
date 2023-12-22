@@ -1,17 +1,46 @@
 'use client'
 
+import { useContext, useEffect, useRef } from 'react'
 import { X, SmileyXEyes } from '@phosphor-icons/react'
-import { CartPizza } from './CartPizza'
 
-import { useContext } from 'react'
 import { CartContext } from '../contexts/CartContextProvider'
+
+import { CartPizza } from './CartPizza'
 import { formatter } from '@/lib/formatter'
 
-export function Cart(){
-    const { openCart, setOpenCart, cart } = useContext(CartContext)
+import { useOnClickOutside } from '@/hooks/useOnClickOutside'
 
+export function Cart(){
+    const { openCart, setOpenCart, cart, getCartFromLocalStorage } = useContext(CartContext)
+
+    const cartRef = useRef<HTMLDivElement | null>(null)
+
+    function onClickOutside() {
+        setOpenCart(false)
+    }
+
+    useOnClickOutside(cartRef, onClickOutside)
+
+    useEffect(() => {
+        const handler = (evt: KeyboardEvent) => {
+            if(evt.key === "Escape"){
+                setOpenCart(false)
+            }
+        }
+
+            document.addEventListener('keydown', handler)
+
+            return () => {
+                document.removeEventListener('keydown', handler)
+            }
+    },[])
+
+    useEffect(() => {
+        getCartFromLocalStorage()
+    },[])
+    
     return (
-        <div className={`fixed top-0 bottom-0 right-0 z-50 flex flex-col justify-between items-center bg-primary text-white w-[440px] ${ !openCart ? 'translate-x-full' : 'translate-x-0' } transition-all`}>
+        <div ref={cartRef} className={`fixed top-0 bottom-0 right-0 z-50 flex flex-col justify-between items-center bg-primary text-white w-[440px] ${ !openCart ? 'translate-x-full' : 'translate-x-0' } transition-all`}>
             <div className="relative w-full">
                 <button onClick={() => setOpenCart(false)} className="absolute top-2 right-2">
                     <X weight='bold' size={32} />
