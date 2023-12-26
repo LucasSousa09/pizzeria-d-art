@@ -10,8 +10,8 @@ type CartContextProps = {
     addPizzaToCart: (pizza: CartItemProps) => void
     removePizzaFromCart: (pizzaName: string) => void
     updateCartQuantity: ( pizzaName:string, quantity:number ) => void
-    getCartFromLocalStorage: () => void
     clearCart: () => void
+    getCartFromLocalStorage: () => void
 }
 
 type CartContextProviderProps = {
@@ -38,11 +38,6 @@ export function CartContextProvider({ children }: CartContextProviderProps){
         if(localStorageCart !== null){
             setCart(JSON.parse(localStorageCart))
         }
-    }
-
-    function clearCart(){
-        setCart([])
-        localStorage.setItem('@pizza-dart:cart', JSON.stringify([]))
     }
 
     function addPizzaToCart(pizza: CartItemProps){
@@ -81,8 +76,22 @@ export function CartContextProvider({ children }: CartContextProviderProps){
         )
     }
 
+    function clearCart(){
+        setCart([])
+        localStorage.setItem('@pizza-dart:cart', JSON.stringify([]))
+    }
+
     return (
-        <CartContext.Provider value={{openCart, setOpenCart, cart, addPizzaToCart, removePizzaFromCart, updateCartQuantity, clearCart , getCartFromLocalStorage}}>
+        <CartContext.Provider value={{
+            openCart, 
+            setOpenCart, 
+            cart, 
+            addPizzaToCart, 
+            removePizzaFromCart, 
+            updateCartQuantity, 
+            clearCart, 
+            getCartFromLocalStorage
+        }}>
             {children}
         </CartContext.Provider>
     )

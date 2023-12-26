@@ -1,7 +1,7 @@
 'use client'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
+import { Pagination, Autoplay } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/pagination';
@@ -17,10 +17,15 @@ export function Slider(){
     return (
         <Swiper
             className='mt-[104px]'
-            modules={[Pagination]}
+            modules={[Pagination, Autoplay]}
             spaceBetween={0}
             slidesPerView={1}
             pagination={{ clickable: true }}
+            autoplay={{
+                delay: 3000,
+                pauseOnMouseEnter: true
+            }}
+            loop
         >
             <SwiperSlide className='relative'>
                 <SliderSlide author='Rodrigues Lucas' text='"Mais do que uma pizza, uma obra de arte"' bannerImg={bannerImg.src} />
