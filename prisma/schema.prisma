@@ -21,7 +21,7 @@ model User {
   street      String?
   district    String?
   zipCode     String?
-  houseNumber String?
+  houseNumber Int?
   complement  String?
   city        String?
   state       String?

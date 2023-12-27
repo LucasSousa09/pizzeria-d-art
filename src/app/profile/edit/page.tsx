@@ -3,10 +3,13 @@
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { useEffect } from 'react';
+import { useForm, SubmitHandler } from "react-hook-form"
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useForm, SubmitHandler } from "react-hook-form"
+import { api } from '../../../lib/axios';
 
 import { InputBox } from "../../../components/FormInputs/InputBox";
 import { Label } from "../../../components/FormInputs/Label";
@@ -15,7 +18,6 @@ import { CpfInput } from '../../../components/FormInputs/CpfInput';
 import { PhoneInput } from '../../../components/FormInputs/PhoneInput';
 import { ZipCodeInput } from '../../../components/FormInputs/ZipCodeInput';
 import { TextArea } from "../../../components/FormInputs/TextArea";
-import { useEffect } from 'react';
 
 const UserInfoSchema = zod.object({
     name: zod.string()
@@ -60,7 +62,9 @@ export default function EditProfile(){
         resolver: zodResolver(UserInfoSchema)
     })
 
-      const onSubmit: SubmitHandler<UserInfoData> = (data) => console.log(data)
+      const onSubmit: SubmitHandler<UserInfoData> = (data) => {
+        api.post('/update-profile', data)
+      }
       
       useEffect(() => {
         const currentError = Object.keys(formState.errors)[0]

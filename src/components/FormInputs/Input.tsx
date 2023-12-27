@@ -7,12 +7,22 @@ type InputProps = {
     onBlur: ChangeHandler,
     name: string,
 
-    type?: 'text' | 'number'
+    defaultValue?: string,
+    type?: 'text' | 'number',
     theme?: 'default' | 'primary'
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({id, name, onBlur, onChange, type = 'text', theme = 'default'}, ref) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>(({
+    id,
+    name, 
+    onBlur, 
+    onChange, 
+    type = 'text', 
+    theme = 'default', 
+    defaultValue = ''
+    }, ref
+    ) => {
     return(
-        <input id={id} name={name} onBlur={onBlur} onChange={onChange} type={type} ref={ref} className={`block p-2 ${theme === 'default' ? 'text-primary' : 'text-background'} w-full border ${theme === 'default' ? 'border-primary' : 'border-background'} bg-transparent rounded h-12 ${theme === 'default' ? 'focus:outline-primary' : 'focus:outline-background'}`} />
+        <input defaultValue={defaultValue} id={id} name={name} onBlur={onBlur} onChange={onChange} type={type} ref={ref} className={`block p-2 ${theme === 'default' ? 'text-primary' : 'text-background'} w-full border ${theme === 'default' ? 'border-primary' : 'border-background'} bg-transparent rounded h-12 ${theme === 'default' ? 'focus:outline-primary' : 'focus:outline-background'}`} />
     )
 })
