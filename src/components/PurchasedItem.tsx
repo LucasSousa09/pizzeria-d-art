@@ -1,11 +1,10 @@
 import { CaretDoubleDown } from '@phosphor-icons/react/dist/ssr'
 import Image from 'next/image'
-import pizzaImg from '../assets/Pizza_7.png'
 
 export function PurchasedItem(){
     return (
         <div className="flex items-start p-5 gap-5 bg-primary text-white rounded">
-            <Image src={pizzaImg.src} alt="" height={90} width={90} />
+            <Image src={''} alt="" height={90} width={90} />
 
             <div className="flex flex-col justify-between items-end text-lg h-full">
                 <div className='flex flex-col items-end gap-2'>
