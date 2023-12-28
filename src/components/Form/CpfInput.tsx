@@ -11,7 +11,7 @@ type InputProps = {
     type?: 'text' | 'number'
 }
 
-export const CpfInput = forwardRef<HTMLInputElement, InputProps>(({id, name, onBlur, onChange, type = 'text'}, ref) => {
+export const CpfInput = forwardRef<HTMLInputElement, InputProps>(({id, name, onBlur, onChange, type = 'text', ...rest}, ref) => {
     return(
         <IMaskInput
             mask="000.000.000-00"
@@ -20,7 +20,7 @@ export const CpfInput = forwardRef<HTMLInputElement, InputProps>(({id, name, onB
             onBlur={onBlur} 
             onChange={onChange} 
             type={type}
-            inputRef={ref} 
+            inputRef={ref}
             className="block p-2 text-primary w-full bg-background border border-primary rounded h-12 focus:outline-primary"
         />
     )

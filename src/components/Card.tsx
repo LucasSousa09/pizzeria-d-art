@@ -32,7 +32,12 @@ export function Card({ pizzaName, price, pizzaImg }: CardProps) {
                 <span className="text-xl font-medium">Quantidade</span>
                 <Quantity quantity={quantity} setQuantity={setQuantity} size='default'/>
             </div>
-            <button onClick={() => addPizzaToCart({pizzaName, pizzaImg, price, quantity})} className="bg-white text-primary text-lg font-medium mt-4 rounded py-3 w-full">Adicionar ao Carrinho</button>
+            <button 
+                onClick={() => addPizzaToCart({pizzaName, pizzaImg, price, quantity})} 
+                className="bg-white text-primary text-lg font-medium mt-4 rounded py-3 w-full hover:brightness-90 active:scale-95"
+            >
+                Adicionar ao Carrinho
+            </button>
         </div>
     )
 }

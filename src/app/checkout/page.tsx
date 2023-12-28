@@ -7,10 +7,10 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { Money, CreditCard , Bank  } from '@phosphor-icons/react'
 
-import { Input } from "../../components/FormInputs/Input";
-import { InputBox } from "../../components/FormInputs/InputBox";
-import { Label } from '../../components/FormInputs/Label';
-import { RadioInput } from '../../components/FormInputs/RadioInput';
+import { Input } from "../../components/Form/Input";
+import { InputBox } from "../../components/Form/InputBox";
+import { Label } from '../../components/Form/Label';
+import { RadioInput } from '../../components/Form/RadioInput';
 
 import { useState } from 'react';
 import { CartPizza } from '../../components/CartPizza';

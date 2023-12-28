@@ -69,7 +69,11 @@ export function Cart(){
                     <strong className="text-xl">Preço Total</strong>
                     <strong className="text-xl">{formatter.format(cart.reduce((cur, acc) => {return cur + (acc.quantity * acc.price / 100)},0))}</strong>
                 </div>
-                <button className="text-xl font-bold bg-white text-primary py-4 w-full mt-6 rounded">Finalizar Compra</button>
+                <button 
+                    className="hover:brightness-90 active:scale-95 text-xl font-bold bg-white text-primary py-4 w-full mt-6 rounded"
+                >
+                    Finalizar Compra
+                </button>
             </footer>
         </div>
     )

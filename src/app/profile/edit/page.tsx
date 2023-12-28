@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth'
 
-import { Form } from '../../../components/FormInputs/Form'
+import { Form } from '../../../components/Form'
 import { prisma } from '../../../lib/prisma'
 
 export type ProfileDataProps = { 

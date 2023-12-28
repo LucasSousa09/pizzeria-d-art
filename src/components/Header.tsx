@@ -8,6 +8,7 @@ import { ShoppingCart, SignOut, UserCircle, Gear } from '@phosphor-icons/react/d
 import { CartContext } from "../contexts/CartContextProvider";
 
 import logoImg from "../assets/Logo.png"
+import { Separator } from "./Separator";
 
 interface HeaderProps {
     pathname: string
@@ -16,7 +17,7 @@ interface HeaderProps {
 export function Header({pathname}: HeaderProps){
     const [ openSettings, setOpenSettings ] = useState(false)
     const {data: session} = useSession()
-    const { setOpenCart } = useContext(CartContext)
+    const { setOpenCart, cart } = useContext(CartContext)
 
     return (
         <>
@@ -37,12 +38,16 @@ export function Header({pathname}: HeaderProps){
                                 }
                             </button>
                             {openSettings ? (
-                                <div className="absolute flex flex-col bg-background p-5 gap-4 rounded border-2 border-primary text-primary font-medium whitespace-nowrap">
-                                    <Link className="flex items-center gap-2" href={'/profile'}>
+                                <div className="absolute right-1/2 translate-x-1/2 flex flex-col bg-background rounded border-2 border-primary text-primary font-medium whitespace-nowrap">
+                                    <Link className="p-4 h-full flex items-center gap-2 hover:brightness-75" href={'/profile'}>
                                         <Gear weight="bold" size={22} />
                                         Meu perfil
                                     </Link>
-                                    <button onClick={() => signOut()} className="flex items-center gap-2">
+                                    <Separator backgroundColor="bg-primary"/>
+                                    <button 
+                                        onClick={() => signOut()} 
+                                        className="p-4 flex items-center gap-2 hover:brightness-75"
+                                    >
                                             <SignOut weight="bold" size={22} />
                                         Logout
                                     </button>
@@ -53,8 +58,17 @@ export function Header({pathname}: HeaderProps){
                         <Link className="font-medium text-2xl text-white bg-primary rounded-full px-[18px] py-3" href='login'>Login</Link>
                     )
                 }
-                <button onClick={() => setOpenCart(true)}>
-                    <ShoppingCart className="text-primary" weight="fill" height={57} width={57}  />
+                <button 
+                    onClick={() => setOpenCart(true)}
+                    className="relative"
+                >
+                    <ShoppingCart className="text-primary" weight="fill" height={57} width={57} />
+                    {
+                        cart.length > 0 ?
+                        <div className="absolute top-[-4px] right-[-2px] bg-primary text-background h-6 w-6 rounded-full outline outline-background font-medium flex items-center justify-center">
+                            {cart.length}
+                        </div> : null
+                    }
                 </button>
             </div>
         </>

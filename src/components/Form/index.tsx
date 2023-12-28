@@ -170,7 +170,12 @@ export function Form({profileData}: FormProps){
             </div>
 
 
-            <button type="submit" className="mt-32 bg-primary text-white font-bold text-2xl px-4 py-3 rounded w-fit">Salvar Alterações</button>
+            <button 
+                type="submit" 
+                className="hover:brightness-90 active:scale-95 mt-32 bg-primary text-white font-bold text-2xl px-4 py-3 rounded w-fit"
+            >
+                Salvar Alterações
+            </button>
         </form>
     )
 }

@@ -30,7 +30,10 @@ export function CartPizza({ pizzaImg, pizzaName, price, quantity, onCheckout = f
                 <div className="flex-grow flex-1">
                     <div className="flex items-center justify-between">
                         <strong className="text-lg ">{pizzaName}</strong>
-                        <button onClick={() => removePizzaFromCart(pizzaName)}>
+                        <button 
+                            onClick={() => removePizzaFromCart(pizzaName)}
+                            className='hover:text-red-900'
+                        >
                             <Trash size={24}/>
                         </button>
 
