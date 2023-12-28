@@ -2,6 +2,7 @@ import { prisma } from "../../../lib/prisma"
 
 export async function POST(req: Request) {
     const body = await req.json()
+
     try{
         await prisma.user.update({
             where: {
@@ -20,10 +21,12 @@ export async function POST(req: Request) {
                 reference: body.reference 
               }
         })
+
+        
     }
     catch(err){
-        console.log(err)
+        return Response.json({error: err})
     }
 
-    return new Response('OK')
+    return Response.json({message: 'Atualização realizada com sucesso!'})
 }
