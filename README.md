@@ -14,8 +14,10 @@ A pizzaria dos seus sonhos agora on-line.
 - React Imask
 - React Toastify
 
-- axios
-- zod
-- prisma 
+- Next Auth
+- Axios
+- Zod
+- Prisma
+- Stripe
 
 *obs: Sem responsividade, tamanho atual 1920px de largura*
