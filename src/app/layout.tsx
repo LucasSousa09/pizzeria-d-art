@@ -1,21 +1,22 @@
 import './globals.css'
 
-import { HeaderContainer } from '../components/HeaderContainer'
-import { Footer } from '../components/Footer'
+import { getServerSession } from 'next-auth'
 
 import { poppins } from './fonts'
+
 import { Cart } from '../components/Cart'
+import { Footer } from '../components/Footer'
+import { HeaderContainer } from '../components/HeaderContainer'
 import { CartContextProvider } from '../contexts/CartContextProvider'
 
 import SessionProvider from '../components/SessionProvider'
-
-import { getServerSession } from 'next-auth'
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
   const session = await getServerSession()
 
   return (
