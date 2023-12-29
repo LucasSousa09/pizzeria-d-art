@@ -43,7 +43,7 @@ export function CartPizza({ pizzaImg, pizzaName, price, quantity, onCheckout = f
                         <strong className="font-medium text-end">{formatter.format(price/100*cartQuantity)}</strong>
 
                         <span className="font-medium">Quantidade</span>
-                        <Quantity pizzaName={pizzaName} quantity={cartQuantity} setQuantity={setCartQuantity} size='sm'/>
+                        <Quantity onCart pizzaName={pizzaName} quantity={cartQuantity} setQuantity={setCartQuantity} size='sm'/>
                     </div>
                 </div>
             </div>

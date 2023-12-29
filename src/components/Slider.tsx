@@ -28,19 +28,19 @@ export function Slider(){
             loop
         >
             <SwiperSlide className='relative'>
-                <SliderSlide author='Rodrigues Lucas' text='"Mais do que uma pizza, uma obra de arte"' bannerImg={bannerImg.src} />
+                <SliderSlide author='Rodrigues, Lucas' text='"Mais do que uma pizza, uma obra de arte"' bannerImg={bannerImg.src} />
             </SwiperSlide>
             
             <SwiperSlide>
-                <SliderSlide author='Rodrigues Lucas' text='"A criatividade é o limite da sua pizza"' bannerImg={bannerImg1.src} />
+                <SliderSlide author='Rodrigues, Lucas' text='"A criatividade é o limite da sua pizza"' bannerImg={bannerImg1.src} />
             </SwiperSlide>
             
             <SwiperSlide>
-                <SliderSlide author='Rodrigues Lucas' text='"Combina com qualquer dia da semana"' bannerImg={bannerImg2.src} />
+                <SliderSlide author='Rodrigues, Lucas' text='"Combina com qualquer dia da semana"' bannerImg={bannerImg2.src} />
             </SwiperSlide>
             
             <SwiperSlide>
-                <SliderSlide author='Rodrigues Lucas' text='"Satisfação é certa por aqui!"' bannerImg={bannerImg3.src} /> 
+                <SliderSlide author='Rodrigues, Lucas' text='"Satisfação é certa por aqui!"' bannerImg={bannerImg3.src} /> 
             </SwiperSlide>    
         </Swiper>
     )

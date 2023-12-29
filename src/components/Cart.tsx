@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useRef } from 'react'
 import { X, SmileyXEyes } from '@phosphor-icons/react'
 
@@ -12,6 +13,7 @@ import { useOnClickOutside } from '@/hooks/useOnClickOutside'
 
 export function Cart(){
     const { openCart, setOpenCart, cart, getCartFromLocalStorage } = useContext(CartContext)
+    const router = useRouter()
 
     const cartRef = useRef<HTMLDivElement | null>(null)
 
@@ -69,8 +71,13 @@ export function Cart(){
                     <strong className="text-xl">Preço Total</strong>
                     <strong className="text-xl">{formatter.format(cart.reduce((cur, acc) => {return cur + (acc.quantity * acc.price / 100)},0))}</strong>
                 </div>
-                <button 
-                    className="hover:brightness-90 active:scale-95 text-xl font-bold bg-white text-primary py-4 w-full mt-6 rounded"
+                <button
+                    onClick={() => {
+                        setOpenCart(false)
+                        return router.push('/checkout')
+                    }} 
+                    disabled={cart.length === 0}
+                    className={`disabled:cursor-not-allowed disabled:brightness-75 disabled:hover:brightness-75 disabled:active:scale-100 hover:brightness-90 active:scale-95 text-xl font-bold bg-white text-primary py-4 w-full mt-6 rounded`}
                 >
                     Finalizar Compra
                 </button>
