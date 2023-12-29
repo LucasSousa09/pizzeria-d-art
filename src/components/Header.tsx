@@ -55,7 +55,7 @@ export function Header({pathname}: HeaderProps){
                             ) : null}
                         </div>
                     ) : pathname === '/login' ? <></> : (
-                        <Link className="font-medium text-2xl text-white bg-primary rounded-full px-[18px] py-3" href='login'>Login</Link>
+                        <Link className="hover:brightness-90 active:scale-95 font-medium text-2xl text-white bg-primary rounded-full px-[18px] py-3" href='login'>Login</Link>
                     )
                 }
                 <button 
