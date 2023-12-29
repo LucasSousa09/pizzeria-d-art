@@ -2,19 +2,20 @@
 
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'; 
-
+import { useContext, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { SubmitHandler, useForm } from 'react-hook-form'
-
 import { Money, CreditCard , Bank  } from '@phosphor-icons/react'
 
 import { Input } from "../../components/Form/Input";
-import { InputBox } from "../../components/Form/InputBox";
 import { Label } from '../../components/Form/Label';
-import { RadioInput } from '../../components/Form/RadioInput';
-
-import { useState } from 'react';
+import { InputBox } from "../../components/Form/InputBox";
 import { CartPizza } from '../../components/CartPizza';
 import { Separator } from '../../components/Separator';
+import { RadioInput } from '../../components/Form/RadioInput';
+import { CartContext } from '@/contexts/CartContextProvider';
+import { formatter } from '@/lib/formatter';
+
 
 const CheckoutSchema = zod.object({
     name: zod.string()
@@ -52,6 +53,8 @@ const CheckoutSchema = zod.object({
 type CheckoutData = zod.infer<typeof CheckoutSchema>
 
 export default function CheckoutPage(){
+    const { cart } = useContext(CartContext)
+    const session = useSession()
     const [ isActive, setIsActive ] = useState('')
 
     const {
@@ -156,17 +159,23 @@ export default function CheckoutPage(){
                     <strong className="flex font-medium text-2xl text-primary mb-2 leading-normal">Pedidos</strong>
                     <div className="flex flex-col items-center justify-between h-[calc(100%-44px)] bg-primary rounded px-2 pb-7">
                         <div className="scrollbar scrollbar-none text-white w-full overflow-y-auto" >
-                            <CartPizza onCheckout />
-                            <CartPizza onCheckout />
-                            <CartPizza onCheckout />
-                            <CartPizza onCheckout />
-                            <CartPizza onCheckout />
+                            {   
+                                cart.map(pizza => {
+                                    return (
+                                        <CartPizza onCheckout pizzaImg={pizza.pizzaImg} pizzaName={pizza.pizzaName} price={pizza.price} quantity={pizza.quantity} key={pizza.pizzaName} />
+                                    )
+                                })
+                            }
                         </div>
                         <div className="flex flex-col w-full pt-5">
                             <Separator />
                             <header className="flex items-center w-full pt-4 pb-2 justify-between px-3">
                                 <strong className="font-bold text-xl text-white leading-normal">Preço Total</strong>
-                                <strong className="font-bold text-xl text-white leading-normal">131,99</strong>
+                                <strong className="font-bold text-xl text-white leading-normal">
+                                    {
+                                        formatter.format(cart.reduce((acc, cur) => (cur.price * cur.quantity) + acc, 0) / 100)
+                                    }
+                                </strong>
                             </header>
                             <button className="pt-2 bg-white text-primary py-3 mx-3 rounded font-bold text-xl leading-normal" type="submit">Finalizar Compra</button>
                         </div>
