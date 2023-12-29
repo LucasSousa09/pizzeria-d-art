@@ -1,6 +1,8 @@
+import { redirect } from "next/navigation"
 import { getServerSession } from 'next-auth'
 
 import { Form } from '../../../components/Form'
+
 import { prisma } from '../../../lib/prisma'
 
 export type ProfileDataProps = { 
@@ -33,7 +35,8 @@ async function getProfileData(sessionEmail: string){
     
         return userProfile
     }
-    catch{
+    catch(err){
+        console.log(err)
         return
     }
 }
@@ -41,9 +44,14 @@ async function getProfileData(sessionEmail: string){
 export default async function EditProfile(){ 
     const session = await getServerSession()
 
-    const profileData: ProfileDataProps = await getProfileData(session?.user?.email || '')
-
-    return (
-        <Form profileData={profileData}/>        
-    )
+    if(session){
+        const profileData: ProfileDataProps = await getProfileData(session?.user?.email || '')
+    
+        return (
+            <Form profileData={profileData}/>        
+        )    
+    }
+    else{
+        redirect('/login')
+    }
 }
