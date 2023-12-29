@@ -54,7 +54,7 @@ export function Header({pathname}: HeaderProps){
                                 </div>
                             ) : null}
                         </div>
-                    ) : pathname === '/login' ? <></> : (
+                    ) : pathname === '/login' ? null : (
                         <Link className="hover:brightness-90 active:scale-95 font-medium text-2xl text-white bg-primary rounded-full px-[18px] py-3" href='login'>Login</Link>
                     )
                 }
@@ -62,13 +62,19 @@ export function Header({pathname}: HeaderProps){
                     onClick={() => setOpenCart(true)}
                     className="relative"
                 >
-                    <ShoppingCart className="text-primary" weight="fill" height={57} width={57} />
                     {
-                        cart.length > 0 ?
-                        <div className="absolute top-[-4px] right-[-2px] bg-primary text-background h-6 w-6 rounded-full outline outline-background font-medium flex items-center justify-center">
-                            {cart.length}
-                        </div> : null
+                        pathname === '/login' || pathname === '/checkout' ? null :
+                        (<>
+                            <ShoppingCart className="text-primary" weight="fill" height={57} width={57} />
+                            {
+                                cart.length > 0 ?
+                                <div className="absolute top-[-4px] right-[-2px] bg-primary text-background h-6 w-6 rounded-full outline outline-background font-medium flex items-center justify-center">
+                                    {cart.length}
+                                </div> : null
+                            }
+                        </>)
                     }
+                    
                 </button>
             </div>
         </>
