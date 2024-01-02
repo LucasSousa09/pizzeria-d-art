@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation"
 import { getServerSession } from 'next-auth'
 
-import { Form } from '../../../components/Form'
+import { getProfileData } from '../../../utils/getProfileData'
 
-import { prisma } from '../../../lib/prisma'
+import { Form } from '../../../components/Form'
 
 export type ProfileDataProps = { 
     id: string;
@@ -22,24 +22,7 @@ export type ProfileDataProps = {
     reference: string | null; 
 } | null | undefined
 
-async function getProfileData(sessionEmail: string){
-    if(sessionEmail.trim() === ''){
-        return
-    }
-    try {
-        const userProfile = await prisma.user.findUnique({
-            where: {
-                email: sessionEmail
-            }
-        })
-    
-        return userProfile
-    }
-    catch(err){
-        console.log(err)
-        return
-    }
-}
+
 
 export default async function EditProfile(){ 
     const session = await getServerSession()
@@ -52,6 +35,6 @@ export default async function EditProfile(){
         )    
     }
     else{
-        redirect('/login')
+        redirect('/login?error=session+error')
     }
 }
