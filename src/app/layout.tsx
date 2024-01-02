@@ -2,6 +2,9 @@ import './globals.css'
 
 import { getServerSession } from 'next-auth'
 
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'
+
 import { poppins } from './fonts'
 
 import { Cart } from '../components/Cart'
@@ -27,6 +30,8 @@ export default async function RootLayout({
             <CartContextProvider>
               <HeaderContainer />
               <Cart />
+              <ToastContainer position='bottom-right' theme='colored' />
+
               {children}
               <Footer />
             </CartContextProvider>
