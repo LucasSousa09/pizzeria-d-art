@@ -1,5 +1,4 @@
 import { stripe } from "../lib/stripe";
-import { formatter } from "../lib/formatter";
 
 import { Card } from "./Card";
 import Stripe from "stripe";
@@ -33,7 +32,7 @@ export async function CardContainer(){
             pizzas.length > 0 ?
             pizzas.map(pizza => {
                 return (
-                    <Card key={pizza.id} pizzaName={pizza.name} price={pizza.price} pizzaImg={pizza.image}  />
+                    <Card key={pizza.id} pizzaName={pizza.name} price={pizza.price} pizzaImg={pizza.image} />
                 )
             }) :
             <strong>Não há pizzas cadastradas</strong>
