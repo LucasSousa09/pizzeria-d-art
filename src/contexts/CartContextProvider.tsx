@@ -12,6 +12,8 @@ type CartContextProps = {
     updateCartQuantity: ( pizzaName:string, quantity:number ) => void
     clearCart: () => void
     getCartFromLocalStorage: () => void
+    loadingCart: boolean
+    setLoadingCart: Dispatch<SetStateAction<boolean>>
 }
 
 type CartContextProviderProps = {
@@ -28,6 +30,7 @@ type CartItemProps = {
 export const CartContext = createContext({} as CartContextProps)
 
 export function CartContextProvider({ children }: CartContextProviderProps){
+    const [loadingCart, setLoadingCart] = useState(true)
     const [ openCart, setOpenCart ] = useState(false)
 
     const [ cart, setCart ] = useState<CartItemProps[]>([])
@@ -90,7 +93,9 @@ export function CartContextProvider({ children }: CartContextProviderProps){
             removePizzaFromCart, 
             updateCartQuantity, 
             clearCart, 
-            getCartFromLocalStorage
+            getCartFromLocalStorage,
+            loadingCart,
+            setLoadingCart
         }}>
             {children}
         </CartContext.Provider>
