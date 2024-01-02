@@ -1,16 +1,26 @@
 'use client'
 
 import Image from "next/image";
-
+import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { GoogleLogo, GithubLogo } from '@phosphor-icons/react/dist/ssr'
 
 import bgImg from '../../assets/abbie-tanner.png'
 
 import { italianno } from '../fonts'
-
-import { signIn } from "next-auth/react";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function Login(){
+    const searchParams = useSearchParams()
+
+    const error = searchParams.get('error')
+
+    useEffect(() => {
+        if(error === 'session error')
+        toast.error('Por favor, faça login antes de tentar atualizar sua conta.')
+    },[])
+
     return (
         <div className="flex items-end h-screen">
            <div className="flex items-center h-full justify-center w-1/2">
