@@ -6,8 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form"
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 import { api } from '../../lib/axios';
 
@@ -104,7 +103,6 @@ export function Form({profileData}: FormProps){
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center'>
-            <ToastContainer position='bottom-right' theme='colored' />
             <div className='mt-16 grid grid-rows-4 grid-flow-col max-w-[1321px] gap-x-[60px]'>
                 <InputBox>
                     <Label idFor="name" text="Nome" />
