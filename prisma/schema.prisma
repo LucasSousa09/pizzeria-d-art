@@ -43,6 +43,8 @@ model Order {
   firstPizzaImg String
   createdAt     DateTime @default(now())
   totalPrice    Int
+  paymentMethod String
+  successfull   String
 
   orderId String @unique
   order   User   @relation(fields: [orderId], references: [id])
