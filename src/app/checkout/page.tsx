@@ -1,4 +1,5 @@
 import { getServerSession } from 'next-auth';
+import { redirect } from "next/navigation";
 
 import { getProfileData } from '@/utils/getProfileData';
 
@@ -27,19 +28,10 @@ export default async function CheckoutPage(){
             <div className="flex flex-col items-center justify-start h-[calc(100vh-104px)]">
                 <h1 className="mt-12 text-5xl text-primary font-bold">Checkout</h1>
                 
-                <CheckoutForm checkoutProps={checkoutData}/>
-               
+                <CheckoutForm checkoutProps={checkoutData}/>      
             </div> 
         )
     }
 
-    return (
-        <div className="flex flex-col items-center justify-start h-[calc(100vh-104px)]">
-            <h1 className="mt-12 text-5xl text-primary font-bold">Checkout</h1>
-            
-            <CheckoutForm />      
-        </div> 
-    )
-
-
+    redirect('/login?error=session+error+checkout')
 }
