@@ -9,12 +9,13 @@ import { formatter } from "../lib/formatter";
 import { CartContext } from "@/contexts/CartContextProvider";
 
 type CardProps = {
+    id: string,
     pizzaName: string,
     price: number,
     pizzaImg: string,
 }
 
-export function Card({ pizzaName, price, pizzaImg }: CardProps) {
+export function Card({ pizzaName, price, pizzaImg, id }: CardProps) {
     const [ quantity, setQuantity ] = useState(0)
 
     const { addPizzaToCart } = useContext(CartContext)
@@ -33,7 +34,7 @@ export function Card({ pizzaName, price, pizzaImg }: CardProps) {
                 <Quantity quantity={quantity} setQuantity={setQuantity} size='default'/>
             </div>
             <button 
-                onClick={() => addPizzaToCart({pizzaName, pizzaImg, price, quantity})} 
+                onClick={() => addPizzaToCart({pizzaName, pizzaImg, price, quantity, id})} 
                 className="bg-white text-primary text-lg font-medium mt-4 rounded py-3 w-full hover:brightness-90 active:scale-95"
             >
                 Adicionar ao Carrinho

@@ -52,6 +52,7 @@ export function Cart(){
                     {
                         cart.length > 0 ?
                         cart.map(cartPizza => <CartPizza 
+                                                id={cartPizza.id}
                                                 pizzaImg={cartPizza.pizzaImg} 
                                                 pizzaName={cartPizza.pizzaName} 
                                                 price={cartPizza.price} 

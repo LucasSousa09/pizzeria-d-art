@@ -21,6 +21,7 @@ type CartContextProviderProps = {
 }
 
 type CartItemProps = {
+    id: string
     pizzaImg: string,
     pizzaName: string,
     price: number,
@@ -39,7 +40,9 @@ export function CartContextProvider({ children }: CartContextProviderProps){
         const localStorageCart = localStorage.getItem('@pizza-dart:cart')
 
         if(localStorageCart !== null){
-            setCart(JSON.parse(localStorageCart))
+            if(localStorageCart !== '[]'){
+                setCart(JSON.parse(localStorageCart))
+            }
         }
     }
 
@@ -81,7 +84,7 @@ export function CartContextProvider({ children }: CartContextProviderProps){
 
     function clearCart(){
         setCart([])
-        localStorage.setItem('@pizza-dart:cart', JSON.stringify([]))
+        localStorage.setItem('@pizza-dart:cart', '[]')
     }
 
     return (

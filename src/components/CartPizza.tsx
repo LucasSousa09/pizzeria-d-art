@@ -12,6 +12,7 @@ import { CartContext } from "@/contexts/CartContextProvider";
 
 
 type CartPizzaProps = {
+    id: string,
     onCheckout?: boolean,
     pizzaImg: string,
     pizzaName: string,
@@ -19,7 +20,7 @@ type CartPizzaProps = {
     quantity: number
 }
 
-export function CartPizza({ pizzaImg, pizzaName, price, quantity, onCheckout = false}: CartPizzaProps){
+export function CartPizza({ pizzaImg, pizzaName, price, quantity, onCheckout = false, id}: CartPizzaProps){
     const [ cartQuantity, setCartQuantity ] = useState(quantity)    
     const { removePizzaFromCart } = useContext(CartContext)
 

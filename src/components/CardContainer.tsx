@@ -12,7 +12,7 @@ async function getPizzasFromStripe(){
         const price = pizza.default_price as Stripe.Price
 
         return {
-            id: pizza.id,
+            id: price.id,
             name: pizza.name,
             price: price.unit_amount || 0,
             image: pizza.images[0]
@@ -32,7 +32,7 @@ export async function CardContainer(){
             pizzas.length > 0 ?
             pizzas.map(pizza => {
                 return (
-                    <Card key={pizza.id} pizzaName={pizza.name} price={pizza.price} pizzaImg={pizza.image} />
+                    <Card key={pizza.id} id={pizza.id} pizzaName={pizza.name} price={pizza.price} pizzaImg={pizza.image} />
                 )
             }) :
             <strong>Não há pizzas cadastradas</strong>
