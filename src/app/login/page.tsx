@@ -8,17 +8,24 @@ import { GoogleLogo, GithubLogo } from '@phosphor-icons/react/dist/ssr'
 import bgImg from '../../assets/abbie-tanner.png'
 
 import { italianno } from '../fonts'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function Login(){
     const searchParams = useSearchParams()
+    const [ callbackUrl, setCallbackUrl ] = useState('/')
 
     const error = searchParams.get('error')
 
     useEffect(() => {
-        if(error === 'session error')
-        toast.error('Por favor, faça login antes de tentar atualizar sua conta.')
+        if(error === 'session error'){
+            toast.error('Por favor, faça login antes de tentar atualizar sua conta.')
+            setCallbackUrl('/profile/edit')
+        }
+        if(error === 'session error checkout'){
+            toast.error('Por favor, faça login antes de realizar o checkout.')
+            setCallbackUrl('/checkout')
+        }
     },[])
 
     return (
@@ -31,7 +38,7 @@ export default function Login(){
                         Faça o seu login com Google 
                     </button>
                     <button 
-                        onClick={() => signIn('github', {callbackUrl: '/'})} 
+                        onClick={() => signIn('github', {callbackUrl})} 
                         className="hover:brightness-90 active:scale-95 w-full flex items-center gap-5 py-3 px-5 text-[28px] text-background rounded bg-[#333]"
                     >
                         <GithubLogo /> 
