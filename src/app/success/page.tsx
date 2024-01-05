@@ -1,10 +1,21 @@
+'use client'
+
 import Image from "next/image";
+import { useContext, useEffect } from "react";
+
+import { CartContext } from "@/contexts/CartContextProvider";
 
 import bgImg from '../../assets/lucian-alexe.png'
 
 import { italianno } from '../fonts'
 
 export default function Success(){
+    const { clearCart } = useContext(CartContext)
+
+    useEffect(() => {
+        clearCart()
+    },[])
+
     return (
         <div className="flex items-end h-screen">
             <div className="flex flex-col items-center justify-center w-1/2 h-full">
