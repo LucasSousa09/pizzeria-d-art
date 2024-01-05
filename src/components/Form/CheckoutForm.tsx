@@ -9,16 +9,16 @@ import { RadioInput } from './RadioInput';
 import { CartPizza } from '../CartPizza';
 import { Separator } from '../Separator';
 
+import { api } from '@/lib/axios';
 import { formatter } from '@/lib/formatter';
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { Money, CreditCard , Bank  } from '@phosphor-icons/react'
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '@/contexts/CartContextProvider';
-import { useRouter } from 'next/navigation';
-import { api } from '@/lib/axios';
-import { toast } from 'react-toastify';
+import { Money, CreditCard , Bank  } from '@phosphor-icons/react';
 
 const CheckoutSchema = zod.object({
     street: zod.string()
@@ -89,6 +89,14 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
     }, [formState.errors])
 
     const onSubmit: SubmitHandler<CheckoutData> = async (data) => {
+        if(data.paymentMethod === 'money'){            
+            return router.push('/success')
+        }
+
+        if(data.paymentMethod === 'pix'){            
+            return router.push('/pix')
+        }
+
         const listItems = cart.map(cartItem => {
             return {
                 price: cartItem.id,
@@ -100,7 +108,7 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
 
        const { checkoutSession } = response.data
 
-        router.push(checkoutSession)
+       router.push(checkoutSession)
     }
     
     useEffect(() => {
