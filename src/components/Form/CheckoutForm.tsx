@@ -17,6 +17,8 @@ import { Money, CreditCard , Bank  } from '@phosphor-icons/react'
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '@/contexts/CartContextProvider';
 import { useRouter } from 'next/navigation';
+import { api } from '@/lib/axios';
+import { toast } from 'react-toastify';
 
 const CheckoutSchema = zod.object({
     street: zod.string()
@@ -36,7 +38,7 @@ const CheckoutSchema = zod.object({
                 .min(2, 'A UF deve conter pelo menos 2 letras')
                 .max(2, 'A UF deve conter no máximo 2 letras'),
     reference: zod.string(),
-    paymentMethod: zod.string()   
+    paymentMethod: zod.string({invalid_type_error: 'Por favor selecione um meio de pagamento'})   
 })
 
 type CheckoutData = zod.infer<typeof CheckoutSchema>
@@ -58,6 +60,8 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
     const { cart, loadingCart, setLoadingCart } = useContext(CartContext)
     const [ isActive, setIsActive ] = useState('')
 
+    const router = useRouter()
+
     const {
         register,
         handleSubmit,
@@ -76,10 +80,29 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
         }
     })
 
-    const onSubmit: SubmitHandler<CheckoutData> = (data) => console.log(data)
-    
-    const router = useRouter()
+    useEffect(() => {
+        const currentError = Object.keys(formState.errors)[0]
+        const errorMessage = formState.errors[currentError as keyof CheckoutData]?.message
 
+        toast.error(errorMessage)
+
+    }, [formState.errors])
+
+    const onSubmit: SubmitHandler<CheckoutData> = async (data) => {
+        const listItems = cart.map(cartItem => {
+            return {
+                price: cartItem.id,
+                quantity: cartItem.quantity
+            }
+        })
+
+       const response = await api.post('/checkout', listItems)
+
+       const { checkoutSession } = response.data
+
+        router.push(checkoutSession)
+    }
+    
     useEffect(() => {
         if(loadingCart){
             setLoadingCart(false)
@@ -183,7 +206,7 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
                         {   
                             cart.map(pizza => {
                                 return (
-                                    <CartPizza onCheckout pizzaImg={pizza.pizzaImg} pizzaName={pizza.pizzaName} price={pizza.price} quantity={pizza.quantity} key={pizza.pizzaName} />
+                                    <CartPizza onCheckout id={pizza.id} pizzaImg={pizza.pizzaImg} pizzaName={pizza.pizzaName} price={pizza.price} quantity={pizza.quantity} key={pizza.pizzaName} />
                                 )
                             })
                         }
@@ -198,7 +221,7 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
                                 }
                             </strong>
                         </header>
-                        <button className="pt-2 bg-white text-primary py-3 mx-3 rounded font-bold text-xl leading-normal" type="submit">Finalizar Compra</button>
+                        <button className="hover:brightness-90 active:scale-95 pt-2 bg-white text-primary py-3 mx-3 rounded font-bold text-xl leading-normal" type="submit">Finalizar Compra</button>
                     </div>
                 </div>
             </div>
