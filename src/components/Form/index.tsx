@@ -85,7 +85,6 @@ export function Form({profileData}: FormProps){
         const { data } = await api.post('/update-profile', updateProfileInfo)
 
         if(data.message){
-            console.log(data.message)
             toast.success(data.message)
         }
         else{
