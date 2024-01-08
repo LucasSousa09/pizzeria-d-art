@@ -10,7 +10,7 @@ type InputBoxProps = {
 
 export function InputBox({ size, rowSpan, children, maxHeight }: InputBoxProps){
     return (
-        <div className={`mt-8 space-y-2 ${!!maxHeight && 'h-[86px]'} ${size === 'xs' && 'w-24'} ${size === 'sm' && 'w-[126px]'} ${!!rowSpan && 'row-span-2'}`}>
+        <div className={`relative mt-8 space-y-2 ${!!maxHeight && 'h-[86px]'} ${size === 'xs' && 'w-24'} ${size === 'sm' && 'w-[126px]'} ${!!rowSpan && 'row-span-2'}`}>
             {children}
         </div>
     )
