@@ -20,7 +20,7 @@ type CartContextProviderProps = {
     children: ReactNode
 }
 
-type CartItemProps = {
+export type CartItemProps = {
     id: string
     pizzaImg: string,
     pizzaName: string,
