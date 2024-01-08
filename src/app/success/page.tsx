@@ -19,8 +19,8 @@ export default function Success(){
     return (
         <div className="flex items-end h-screen">
             <div className="flex flex-col items-center justify-center w-1/2 h-full">
-                <p className="text-primary text-5xl font-bold text-center max-w-[670px] leading-normal mt-[-104px]">Parabéns Crustóvão, seu pedido foi recebido!</p>
-                <p className="text-primary text-5xl font-bold text-center max-w-[709px] leading-normal">A pizzeria D'arte agradece!</p>
+                <p className={`${italianno.className} text-primary text-[80px] font-bold text-center max-w-[670px] leading-normal mt-[-104px]`}>Parabéns Crustóvão, seu pedido foi recebido!</p>
+                <p className={`${italianno.className} text-primary text-[80px] font-bold text-center max-w-[709px] leading-normal`}>A pizzeria D'arte agradece!</p>
             </div>
             <div className="relative flex items-center justify-center w-1/2 h-screen">
                 <Image className="object-cover brightness-75" src={bgImg.src} alt="" fill  />
