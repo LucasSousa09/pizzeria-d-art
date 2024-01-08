@@ -39,6 +39,7 @@ model Pizza {
 }
 
 model Order {
+  id            String   @id @default(uuid())
   pizzas        String
   firstPizzaImg String
   createdAt     DateTime @default(now())
@@ -46,6 +47,6 @@ model Order {
   paymentMethod String
   successfull   String
 
-  orderId String @unique
+  orderId String
   order   User   @relation(fields: [orderId], references: [id])
 }
