@@ -89,26 +89,30 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
     }, [formState.errors])
 
     const onSubmit: SubmitHandler<CheckoutData> = async (data) => {
-        if(data.paymentMethod === 'money'){            
-            return router.push('/success')
-        }
+        const dataForOrder = { paymentMethod: data.paymentMethod, cart } 
+        const response = await api.post('/create-order', dataForOrder)
 
-        if(data.paymentMethod === 'pix'){            
-            return router.push('/pix')
-        }
+        console.log(response)
+    //     if(data.paymentMethod === 'money'){            
+    //         return router.push('/success')
+    //     }
 
-        const listItems = cart.map(cartItem => {
-            return {
-                price: cartItem.id,
-                quantity: cartItem.quantity
-            }
-        })
+    //     if(data.paymentMethod === 'pix'){            
+    //         return router.push('/pix')
+    //     }
 
-       const response = await api.post('/checkout', listItems)
+    //     const listItems = cart.map(cartItem => {
+    //         return {
+    //             price: cartItem.id,
+    //             quantity: cartItem.quantity
+    //         }
+    //     })
 
-       const { checkoutSession } = response.data
+    //    const response = await api.post('/checkout', listItems)
 
-       router.push(checkoutSession)
+    //    const { checkoutSession } = response.data
+
+    //    router.push(checkoutSession)
     }
     
     useEffect(() => {
@@ -129,44 +133,44 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
                 <div className="bg-primary rounded max-w-[916px] pt-[-4px] px-7 pb-7 grid grid-cols-2 grid-rows-3 grid-flow-col gap-x-16 mb-4">
                     <InputBox>
                         <Label theme='primary' idFor="street" text='Rua' />
-                        <Input theme="primary" id="street" {...register("street")} />
+                        <Input disabled theme="primary" id="street" {...register("street")} />
                     </InputBox>
 
                     <InputBox>
                         <Label theme='primary' idFor="district" text='Bairro' />
-                        <Input theme="primary" id="district" {...register("district")} />
+                        <Input disabled theme="primary" id="district" {...register("district")} />
                     </InputBox>
 
                     <InputBox>
                         <Label theme='primary' idFor="zipCode" text='CEP' />
-                        <Input theme="primary" id="zipCode" {...register("zipCode")} />
+                        <Input disabled theme="primary" id="zipCode" {...register("zipCode")} />
                     </InputBox>
 
                     <div className='flex gap-5'>
                         <InputBox size='xs'>
                             <Label theme='primary' idFor="state" text='UF' />
-                            <Input theme="primary" id="state" {...register("state")} />
+                            <Input disabled theme="primary" id="state" {...register("state")} />
                         </InputBox>
 
                         <InputBox size="sm">
                             <Label theme='primary' idFor="houseNumber" text='Número' />
-                            <Input theme="primary" id="houseNumber" {...register("houseNumber")} />
+                            <Input disabled theme="primary" id="houseNumber" {...register("houseNumber")} />
                         </InputBox>
 
                         <InputBox>
                             <Label theme='primary' idFor="complement" text='Comp.' />
-                            <Input theme="primary" id="complement" {...register("complement")} />
+                            <Input disabled theme="primary" id="complement" {...register("complement")} />
                         </InputBox>
                     </div>
 
                     <InputBox>
                         <Label theme='primary' idFor="city" text='Cidade' />
-                        <Input theme="primary" id="city" {...register("city")} />
+                        <Input disabled theme="primary" id="city" {...register("city")} />
                     </InputBox>
 
                     <InputBox>
                         <Label theme='primary' idFor="reference" text='Ponto de referencia' />
-                        <Input theme="primary" id="reference" {...register("reference")} />
+                        <Input disabled theme="primary" id="reference" {...register("reference")} />
                     </InputBox>
                 </div>
             </div>
