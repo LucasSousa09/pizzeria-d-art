@@ -14,9 +14,9 @@ interface HeaderProps {
     pathname: string
 }
 
-export function Header({pathname}: HeaderProps){
+export function Header({ pathname }: HeaderProps){
     const [ openSettings, setOpenSettings ] = useState(false)
-    const {data: session} = useSession()
+    const { data: session } = useSession()
     const { setOpenCart, cart } = useContext(CartContext)
 
     return (
