@@ -12,7 +12,7 @@ const config: Config = {
         primary: '#F13A00',
         background: '#FFE3DA',
         'pag-active': '#FF8B02',
-        overlay: 'rgba(0,0,0,0.5)'
+        overlay: 'rgba(0,0,0,0.4)',
       },
       maxWidth: {
         '1920': '1920px'
