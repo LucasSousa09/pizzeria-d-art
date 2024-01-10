@@ -12,7 +12,7 @@ export default async function Profile(){
     if(session){
         return (
             <>
-                <ProfileBox label='Minhas Compras'>
+                <ProfileBox label='Meus Pedidos'>
                     <PurchasedItem />
                 </ProfileBox>
     
