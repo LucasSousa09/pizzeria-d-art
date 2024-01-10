@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import { CardContainer } from "../components/CardContainer";
 import { Slider } from "../components/Slider";
 
