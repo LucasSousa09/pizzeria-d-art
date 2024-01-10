@@ -5,15 +5,38 @@ import { PencilSimple } from "@phosphor-icons/react/dist/ssr";
 
 import { ProfileBox } from "../../components/ProfileBox";
 import { PurchasedItem } from "../../components/PurchasedItem";
+import { prisma } from "@/lib/prisma";
 
 export default async function Profile(){
     const session = await getServerSession()
+
+    const userId = await prisma.user.findUnique({
+        where: {
+            email: session?.user?.email || ''
+        },
+        select: {
+            id: true
+        }
+    })
+
+    
+    const orders = await prisma.order.findMany({
+        where: {
+            orderId: userId?.id || ''
+        }
+    })
+    
+    console.log(orders)
 
     if(session){
         return (
             <>
                 <ProfileBox label='Meus Pedidos'>
-                    <PurchasedItem />
+                    {
+                        orders.length > 0 && (
+                            orders.map(order => <PurchasedItem key={order.id} createdAt={order.createdAt} pizzaImg={order.firstPizzaImg} totalPrice={order.totalPrice} />)
+                        ) 
+                    }
                 </ProfileBox>
     
                 <ProfileBox label='Informações Pessoais'>
