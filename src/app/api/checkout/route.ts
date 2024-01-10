@@ -7,7 +7,7 @@ export async function POST(req: Request) {
         line_items: body.map((lineItem: {price: string, quantity: number}) => lineItem ),
         mode: 'payment',
         success_url: `http://localhost:3000/success`,
-        cancel_url: `http://localhost:3000/`,
+        cancel_url: `http://localhost:3000/checkout`,
       });
 
     return Response.json({checkoutSession: session.url})
