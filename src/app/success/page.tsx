@@ -1,7 +1,11 @@
 'use client'
 
+import Link from "next/link";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 import { useContext, useEffect } from "react";
+import { useSearchParams, redirect } from "next/navigation";
+import { ArrowRight, ArrowLeft } from '@phosphor-icons/react'
 
 import { CartContext } from "@/contexts/CartContextProvider";
 
@@ -10,21 +14,50 @@ import bgImg from '../../assets/lucian-alexe.png'
 import { italianno } from '../fonts'
 
 export default function Success(){
+    const session = useSession()
+    const searchParams = useSearchParams()
     const { clearCart } = useContext(CartContext)
 
     useEffect(() => {
+        if(session.data?.user?.name === undefined){
+            redirect('/login')
+        }
         clearCart()
     },[])
 
     return (
-        <div className="flex items-end h-screen">
-            <div className="flex flex-col items-center justify-center w-1/2 h-full">
-                <p className={`${italianno.className} text-primary text-[80px] font-bold text-center max-w-[670px] leading-normal mt-[-104px]`}>Parabéns Crustóvão, seu pedido foi recebido!</p>
-                <p className={`${italianno.className} text-primary text-[80px] font-bold text-center max-w-[709px] leading-normal`}>A pizzeria D'arte agradece!</p>
+        <div className="relative flex items-end h-[calc(100vh-104px)] mt-[104px] w-screen">
+            <Image className="w-full" src={bgImg} alt="Delivery man in a motorcicle" />
+            <div 
+                className={`absolute top-0 left-0 bottom-0 bg-overlay flex flex-col items-center justify-center w-1/2 h-full ${italianno.className} text-white`}
+            >
+                    <p className={`mt-[-52px] text-8xl text-center leading-tight`}>
+                        Parabéns {session.data?.user?.name}, seu pedido foi recebido!
+                    </p>
+                    <p className={`text-8xl text-center leading-tight`}>
+                        A pizzeria D'arte agradece !
+                    </p>
+
+                    <div className="mt-16 w-full flex items-center justify-between text-4xl max-w-[845px]">
+                        <Link className="flex items center gap-3" href={'/'}>
+                            <ArrowLeft height={32} width={32} />
+                            Voltar para o início
+                        </Link>
+                        <Link className="flex items center gap-3" href={'/profile'}>
+                            Verificar pedido 
+                            <ArrowRight height={32} width={32}/>
+                        </Link>
+                    </div>
             </div>
-            <div className="relative flex items-center justify-center w-1/2 h-screen">
-                <Image className="object-cover brightness-75" src={bgImg.src} alt="" fill  />
-                <p className={`${italianno.className} absolute z-10 text-white text-[80px] text-center max-w-3xl leading-tight`}>Sua Pizza está sendo preparada e logo estará a caminho!</p>
+            <div 
+                className={`absolute top-0 right-0 bottom-0 bg-gradient-to-r from-[rgba(0,0,0,0.4)] to-[rgba(0,0,0,0)] w-1/2 h-full flex items-center justify-center`}
+            >
+                {
+                    searchParams.get('payment type') === 'money' && (
+                        <p className={`mt-[-154px] ${italianno.className} text-orange-500 text-8xl text-center leading-tight max-w-[845px]`}>Como você selecionou dinheiro, o pagamento será realizado na entrega.</p>
+                    )
+                }
+
             </div>
         </div>
     )
