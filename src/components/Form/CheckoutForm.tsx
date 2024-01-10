@@ -90,29 +90,28 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
 
     const onSubmit: SubmitHandler<CheckoutData> = async (data) => {
         const dataForOrder = { paymentMethod: data.paymentMethod, cart } 
-        const response = await api.post('/create-order', dataForOrder)
+        await api.post('/create-order', dataForOrder)
 
-        console.log(response)
-    //     if(data.paymentMethod === 'money'){            
-    //         return router.push('/success')
-    //     }
+        if(data.paymentMethod === 'money'){            
+            return router.push('/success?payment+type=money')
+        }
 
-    //     if(data.paymentMethod === 'pix'){            
-    //         return router.push('/pix')
-    //     }
+        if(data.paymentMethod === 'pix'){            
+            return router.push('/success?payment+type=pix')
+        }
 
-    //     const listItems = cart.map(cartItem => {
-    //         return {
-    //             price: cartItem.id,
-    //             quantity: cartItem.quantity
-    //         }
-    //     })
+        const listItems = cart.map(cartItem => {
+            return {
+                price: cartItem.id,
+                quantity: cartItem.quantity
+            }
+        })
 
-    //    const response = await api.post('/checkout', listItems)
+       const response = await api.post('/checkout', listItems)
 
-    //    const { checkoutSession } = response.data
+       const { checkoutSession } = response.data
 
-    //    router.push(checkoutSession)
+       router.push(checkoutSession)
     }
     
     useEffect(() => {
