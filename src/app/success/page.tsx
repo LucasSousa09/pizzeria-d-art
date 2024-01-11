@@ -12,17 +12,39 @@ import { CartContext } from "@/contexts/CartContextProvider";
 import bgImg from '../../assets/lucian-alexe.png'
 
 import { italianno } from '../fonts'
+import { api } from "@/lib/axios";
 
 export default function Success(){
     const session = useSession()
     const searchParams = useSearchParams()
     const { clearCart } = useContext(CartContext)
 
+    async function getLastCheckoutSession(sessionId: string){
+        if(sessionId === ''){
+            console.log('not session')
+            return
+        }
+
+        const response = await api.get(`get-checkout-session?session_id=${sessionId}`)
+        const { data } = response
+
+        if(response.status === 200){
+
+        }
+        return
+    }
+
     useEffect(() => {
         if(session.data?.user?.name === undefined){
             redirect('/login')
         }
         clearCart()
+    },[])
+
+    useEffect(() => {
+        const sessionId = searchParams.get('session_id') 
+        getLastCheckoutSession(sessionId || '')
+        
     },[])
 
     return (
