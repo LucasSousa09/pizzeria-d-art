@@ -7,6 +7,28 @@ import { ProfileBox } from "../../components/ProfileBox";
 import { PurchasedItem } from "../../components/PurchasedItem";
 import { prisma } from "@/lib/prisma";
 
+export type Pizza = {
+    id: string,
+    pizzaName: string,
+    price: number,
+    pizzaImg: string,
+    quantity: number
+}
+
+const payment = {
+    money: 'Dinheiro',
+    pix: 'PIX',
+    credit: 'Cartão de Crédito',
+}
+
+const pizzaStatus = {
+    pending: 'Em andamento',
+    finished: 'Concluída',
+    canceled: 'Cancelada'
+}
+
+
+
 export default async function Profile(){
     const session = await getServerSession()
 
@@ -26,7 +48,6 @@ export default async function Profile(){
         }
     })
     
-    console.log(orders)
 
     if(session){
         return (
@@ -34,7 +55,15 @@ export default async function Profile(){
                 <ProfileBox label='Meus Pedidos'>
                     {
                         orders.length > 0 && (
-                            orders.map(order => <PurchasedItem key={order.id} createdAt={order.createdAt} pizzaImg={order.firstPizzaImg} totalPrice={order.totalPrice} />)
+                            orders.map(order => <PurchasedItem 
+                                                    key={order.id} 
+                                                    createdAt={order.createdAt} 
+                                                    pizzaImage={order.firstPizzaImg} 
+                                                    totalPrice={order.totalPrice} 
+                                                    paymentType={payment[order.paymentMethod as 'money' | 'credit' | 'pix'] }
+                                                    pizzas={JSON.parse(order.pizzas)}
+                                                    status={pizzaStatus[order.successfull as 'pending' | 'finished'| 'canceled']}
+                                                />)
                         ) 
                     }
                 </ProfileBox>
