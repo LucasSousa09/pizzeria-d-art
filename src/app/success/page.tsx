@@ -14,7 +14,6 @@ import { api } from "@/lib/axios";
 import bgImg from '../../assets/lucian-alexe.png'
 
 import { italianno } from '../fonts'
-import { prisma } from "@/lib/prisma";
 
 export default function Success(){
     const session = useSession()
