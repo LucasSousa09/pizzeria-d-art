@@ -9,27 +9,34 @@ import { ArrowRight, ArrowLeft } from '@phosphor-icons/react'
 
 import { CartContext } from "@/contexts/CartContextProvider";
 
+import { api } from "@/lib/axios";
+
 import bgImg from '../../assets/lucian-alexe.png'
 
 import { italianno } from '../fonts'
-import { api } from "@/lib/axios";
+import { prisma } from "@/lib/prisma";
 
 export default function Success(){
     const session = useSession()
     const searchParams = useSearchParams()
     const { clearCart } = useContext(CartContext)
 
-    async function getLastCheckoutSession(sessionId: string){
-        if(sessionId === ''){
-            console.log('not session')
+    async function updateOrderStatus(data: {paymentStatus: string, sessionStatus: string}, orderId: string){
+        if(data.paymentStatus === 'paid' && data.sessionStatus === 'complete'){
+            api.patch('update-order', {orderId})
+        }
+    }
+
+    async function getLastCheckoutSession(params: {sessionId: string, orderId: string}){
+        if(params.sessionId === ''){
             return
         }
 
-        const response = await api.get(`get-checkout-session?session_id=${sessionId}`)
+        const response = await api.get(`get-checkout-session?session_id=${params.sessionId}`)
         const { data } = response
 
         if(response.status === 200){
-
+            updateOrderStatus(data, params.orderId)
         }
         return
     }
@@ -42,9 +49,15 @@ export default function Success(){
     },[])
 
     useEffect(() => {
-        const sessionId = searchParams.get('session_id') 
-        getLastCheckoutSession(sessionId || '')
+        const sessionId = searchParams.get('session_id')
+        const orderId = searchParams.get('order_id') 
         
+        const params = {
+            sessionId: sessionId || '',
+            orderId: orderId || ''
+        }
+
+        getLastCheckoutSession(params)
     },[])
 
     return (
