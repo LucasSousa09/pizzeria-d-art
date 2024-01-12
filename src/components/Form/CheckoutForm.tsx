@@ -88,30 +88,37 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
 
     }, [formState.errors])
 
-    const onSubmit: SubmitHandler<CheckoutData> = async (data) => {
-        const dataForOrder = { paymentMethod: data.paymentMethod, cart } 
-        await api.post('/create-order', dataForOrder)
+    const onSubmit: SubmitHandler<CheckoutData> = async (checkoutData) => {
+        const dataForOrder = { paymentMethod: checkoutData.paymentMethod, cart } 
+        const orderDataId = await api.post('/create-order', dataForOrder)
 
-        if(data.paymentMethod === 'money'){            
-            return router.push('/success?payment+type=money')
-        }
 
-        if(data.paymentMethod === 'pix'){            
-            return router.push('/success?payment+type=pix')
-        }
-
-        const listItems = cart.map(cartItem => {
-            return {
-                price: cartItem.id,
-                quantity: cartItem.quantity
+        if(orderDataId.status === 200){
+            const { data } = orderDataId
+    
+            if(checkoutData.paymentMethod === 'money'){            
+                return router.push('/success?payment+type=money')
             }
-        })
+    
+            if(checkoutData.paymentMethod === 'pix'){            
+                return router.push('/success?payment+type=pix')
+            }
+    
+            const listItems = cart.map(cartItem => {
+                return {
+                    price: cartItem.id,
+                    quantity: cartItem.quantity
+                }
+            })
+    
+           const response = await api.post('/checkout', {listItems, data})
+    
+           const { checkoutSession } = response.data
+    
+           return router.push(checkoutSession)
+        }
 
-       const response = await api.post('/checkout', listItems)
-
-       const { checkoutSession } = response.data
-
-       router.push(checkoutSession)
+        return toast.error('Algo de errado aconteceu, por favor tente novamente mais tarde')
     }
     
     useEffect(() => {
