@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth'
 
 import { getProfileData } from '../../../utils/getProfileData'
 
-import { Form } from '../../../components/Form'
+import { EditProfileForm } from '../../../components/Form/EditProfileForm'
 
 export type ProfileDataProps = { 
     id: string;
@@ -31,7 +31,7 @@ export default async function EditProfile(){
         const profileData: ProfileDataProps = await getProfileData(session?.user?.email || '')
     
         return (
-            <Form profileData={profileData}/>        
+            <EditProfileForm profileData={profileData}/>        
         )    
     }
     else{
