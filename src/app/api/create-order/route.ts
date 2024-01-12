@@ -20,7 +20,7 @@ export async function POST(req: Request) {
  
         const totalPrice = body.cart.reduce((acc, cur) => acc + (cur.price * cur.quantity),0)
 
-        await prisma.order.create({
+        const orderId = await prisma.order.create({
             data: {
                 pizzas: JSON.stringify(body.cart),
                 successfull: 'pending',
@@ -28,10 +28,13 @@ export async function POST(req: Request) {
                 totalPrice,
                 paymentMethod: body.paymentMethod,
                 orderId: userId?.id || ''
+            },
+            select: {
+                id: true
             }
         })
 
-        return new Response('A new order was sucessfully created!')
+        return Response.json({orderId})
     }
     catch(err){
         return new Response('Failure at creating the order', {
