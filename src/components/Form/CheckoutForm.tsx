@@ -18,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '@/contexts/CartContextProvider';
-import { Money, CreditCard , Bank  } from '@phosphor-icons/react';
+import { Money, CreditCard , Bank, ArrowClockwise  } from '@phosphor-icons/react';
 
 const CheckoutSchema = zod.object({
     street: zod.string()
@@ -59,6 +59,8 @@ type CheckoutFormProps = {
 export function CheckoutForm({checkoutProps}: CheckoutFormProps){
     const { cart, loadingCart, setLoadingCart } = useContext(CartContext)
     const [ isActive, setIsActive ] = useState('')
+    const [ isCreatingCheckout, setIsCreatingCheckout ] = useState(false)
+
 
     const router = useRouter()
 
@@ -89,9 +91,9 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
     }, [formState.errors])
 
     const onSubmit: SubmitHandler<CheckoutData> = async (checkoutData) => {
+        setIsCreatingCheckout(state => !state)
         const dataForOrder = { paymentMethod: checkoutData.paymentMethod, cart } 
         const orderDataId = await api.post('/create-order', dataForOrder)
-
 
         if(orderDataId.status === 200){
             const { data } = orderDataId
@@ -239,7 +241,17 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
                                 }
                             </strong>
                         </header>
-                        <button className="hover:brightness-90 active:scale-95 pt-2 bg-white text-primary py-3 mx-3 rounded font-bold text-xl leading-normal" type="submit">Finalizar Compra</button>
+                        <button 
+                            className="disabled:cursor-not-allowed disabled:brightness-75 hover:brightness-90 active:scale-95 pt-2 bg-white text-primary py-3 mx-3 rounded font-bold text-xl leading-normal flex justify-center items-center" 
+                            type="submit"
+                            disabled={isCreatingCheckout}
+                        >
+                            {isCreatingCheckout ? (
+                                <ArrowClockwise className="animate-spin" weight='bold' height={30} width={30} />
+                            ) :
+                                <span>Finalizar Compra</span>                        
+                            }
+                        </button>
                     </div>
                 </div>
             </div>
