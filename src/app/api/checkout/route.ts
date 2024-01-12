@@ -1,13 +1,23 @@
 import { stripe } from "@/lib/stripe";
 
 export async function POST(req: Request) {
-    const body = await req.json()
+    const body: {
+      listItems: {
+        price: string, 
+        quantity: number
+      }[],
+      data: {
+        orderId: {
+          id: string
+        }
+      }
+    } = await req.json()
 
     try {
       const session = await stripe.checkout.sessions.create({
-          line_items: body.map((lineItem: {price: string, quantity: number}) => lineItem ),
+          line_items: body.listItems.map((lineItem: {price: string, quantity: number}) => lineItem ),
           mode: 'payment',
-          success_url: `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}`,
+          success_url: `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}&order_id=${body.data.orderId.id}`,
           cancel_url: `http://localhost:3000/checkout`,
         });
       
