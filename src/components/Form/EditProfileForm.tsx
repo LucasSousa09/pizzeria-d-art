@@ -3,7 +3,7 @@
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form"
 
 import { toast } from 'react-toastify';
@@ -19,6 +19,7 @@ import { ZipCodeInput } from './ZipCodeInput';
 import { TextArea } from "./TextArea";
 
 import type { ProfileDataProps } from '../../app/profile/edit/page'
+import { ArrowClockwise } from '@phosphor-icons/react';
 
 const UserInfoSchema = zod.object({
     name: zod.string()
@@ -52,13 +53,28 @@ const UserInfoSchema = zod.object({
     reference: zod.string(),     
 })
 
-export type UserInfoData = zod.infer<typeof UserInfoSchema>
+export type UserInfoData = {
+    name: string | undefined;
+    cpf: string | undefined;
+    phone: string | undefined;
+    email: string | undefined;
+    street: string | undefined;
+    district: string | undefined;
+    zipCode: string | undefined;
+    houseNumber: number | undefined;
+    complement: string | undefined;
+    city: string | undefined;
+    state: string | undefined;
+    reference: string | undefined;
+}
 
 type FormProps = {
     profileData?: ProfileDataProps
 }
 
-export function Form({profileData}: FormProps){
+export function EditProfileForm({profileData}: FormProps){
+    const [isSendingProfileUpdates, setIsSendingProfileUpdates] = useState(false)
+
     const {
         register,
         handleSubmit,
@@ -82,13 +98,69 @@ export function Form({profileData}: FormProps){
     })
 
     const onSubmit: SubmitHandler<UserInfoData> = async (updateProfileInfo) => {
+        setIsSendingProfileUpdates(true)
+        if(
+            updateProfileInfo.name === profileData?.username &&
+            updateProfileInfo.cpf === profileData?.cpf &&
+            updateProfileInfo.phone === profileData?.phone &&
+            updateProfileInfo.street === profileData?.street &&
+            updateProfileInfo.district === profileData?.district &&
+            updateProfileInfo.zipCode === profileData?.zipCode &&
+            updateProfileInfo.houseNumber === profileData?.houseNumber &&
+            updateProfileInfo.complement === profileData?.complement &&
+            updateProfileInfo.city === profileData?.city &&
+            updateProfileInfo.state === profileData?.state &&
+            updateProfileInfo.reference === profileData?.reference
+        ){
+            setIsSendingProfileUpdates(false)
+            return toast.error('Faça alguma alteração antes de atualizar suas informações')
+        }
+
+        if(updateProfileInfo.name === profileData?.username){
+            updateProfileInfo.name = undefined
+        }
+        if(updateProfileInfo.cpf === profileData?.cpf){
+            updateProfileInfo.cpf = undefined
+        }
+        if(updateProfileInfo.phone === profileData?.phone){
+            updateProfileInfo.phone = undefined
+        }
+        if(updateProfileInfo.street === profileData?.street){
+            updateProfileInfo.street = undefined
+        }
+        if(updateProfileInfo.district === profileData?.district){
+            updateProfileInfo.district = undefined
+        }
+        if(updateProfileInfo.zipCode === profileData?.zipCode){
+            updateProfileInfo.zipCode = undefined
+        }
+        if(updateProfileInfo.houseNumber === profileData?.houseNumber){
+            updateProfileInfo.houseNumber = undefined
+        }
+        if(updateProfileInfo.complement === profileData?.complement){
+            updateProfileInfo.complement = undefined
+        }
+        if(updateProfileInfo.city === profileData?.city){
+            updateProfileInfo.city = undefined
+        }
+        if(updateProfileInfo.state === profileData?.state){
+            updateProfileInfo.state = undefined
+        }
+        if(updateProfileInfo.reference === profileData?.reference){
+            updateProfileInfo.reference = undefined
+        }
+
         const { data } = await api.post('/update-profile', updateProfileInfo)
+        
 
         if(data.message){
             toast.success(data.message)
+            setTimeout(() => setIsSendingProfileUpdates(false),3000)            
         }
+
         else{
             toast.error(data.error.meta.cause)
+            setTimeout(() => setIsSendingProfileUpdates(false),3000)
         }
     }
       
@@ -168,10 +240,17 @@ export function Form({profileData}: FormProps){
 
 
             <button 
-                type="submit" 
-                className="hover:brightness-90 active:scale-95 mt-32 bg-primary text-white font-bold text-2xl px-4 py-3 rounded w-fit"
+                type="submit"
+                disabled={isSendingProfileUpdates} 
+                className="disabled:brightness-75 disabled:cursor-not-allowed hover:brightness-90 active:scale-95 mt-32 bg-primary text-white font-bold text-2xl px-4 py-3 rounded w-fit"
             >
-                Salvar Alterações
+                {
+                    isSendingProfileUpdates ? (
+                        <ArrowClockwise className="animate-spin" height={30} width={30} weight="bold" />
+                    ) : (
+                        'Salvar Alterações'
+                    )
+                }
             </button>
         </form>
     )
