@@ -60,35 +60,35 @@ export default function Success(){
     },[])
 
     return (
-        <div className="relative flex items-end h-[calc(100vh-104px)] mt-[104px] w-screen">
-            <Image className="w-full" src={bgImg} alt="Delivery man in a motorcicle" />
+        <div className="relative flex items-end min-h-[calc(100vh-60px)] mt-[60px] md:mt-[104px] w-screen">
+            <Image className="w-full h-[calc(100vh-60px)] object-cover" src={bgImg} alt="Delivery man in a motorcicle" />
             <div 
-                className={`absolute top-0 left-0 bottom-0 bg-overlay flex flex-col items-center justify-center w-1/2 h-full ${italianno.className} text-white`}
+                className={`absolute top-0 left-0 right-0 pt-16 xl:pt-6 px-5 xl:px-0 xl:bottom-0 xl:right-1/2 bg-overlay flex flex-col items-center justify-center xl:w-1/2 h-1/2 xl:h-full ${italianno.className} text-white`}
             >
-                    <p className={`mt-[-52px] text-8xl text-center leading-tight`}>
+                    <p className={`xl:mt-[-52px] text-4xl sm:text-6xl xl:text-7xl text-center leading-tight`}>
                         Parabéns {session.data?.user?.name}, seu pedido foi recebido!
                     </p>
-                    <p className={`text-8xl text-center leading-tight`}>
+                    <p className={`text-4xl sm:text-6xl xl:text-7xl text-center leading-tight`}>
                         A pizzeria D'arte agradece !
                     </p>
 
-                    <div className="mt-16 w-full flex items-center justify-between text-4xl max-w-[845px]">
+                    <div className="mt-10 sm:mt-14 xl:mt-16 w-full flex items-center justify-between text-2xl sm:text-4xl max-w-[845px]">
                         <Link className="flex items center gap-3" href={'/'}>
-                            <ArrowLeft height={32} width={32} />
+                            <ArrowLeft className="h-6 w-5 lg:h-8 lg:w-8" />
                             Voltar para o início
                         </Link>
                         <Link className="flex items center gap-3" href={'/profile'}>
                             Verificar pedido 
-                            <ArrowRight height={32} width={32}/>
+                            <ArrowRight className="h-6 w-5 lg:h-8 lg:w-8" />
                         </Link>
                     </div>
             </div>
             <div 
-                className={`absolute top-0 right-0 bottom-0 bg-gradient-to-r from-[rgba(0,0,0,0.4)] to-[rgba(0,0,0,0)] w-1/2 h-full flex items-center justify-center`}
+                className={`absolute bottom-0 left-0 right-0 xl:pt-6 xl:top-0 xl:left-1/2 flex items-center justify-center px-5 xl:px-0 xl:w-1/2 h-1/2 xl:h-full bg-overlay xl:bg-transparent xl:bg-gradient-to-r xl:from-[rgba(0,0,0,0.4)] xl:to-[rgba(0,0,0,0)]`}
             >
                 {
                     searchParams.get('payment type') === 'money' && (
-                        <p className={`mt-[-154px] ${italianno.className} text-orange-500 text-8xl text-center leading-tight max-w-[845px]`}>Como você selecionou dinheiro, o pagamento será realizado na entrega.</p>
+                        <p className={`mt-[-120px] xl:mt-[-154px] ${italianno.className} text-orange-500 text-4xl sm:text-6xl xl:text-7xl text-center leading-tight max-w-[845px]`}>Como você selecionou dinheiro, o pagamento será realizado na entrega.</p>
                     )
                 }
 
