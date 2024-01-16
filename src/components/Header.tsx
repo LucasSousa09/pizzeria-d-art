@@ -21,26 +21,31 @@ export function Header({ pathname }: HeaderProps){
 
     return (
         <>
-            <Link href="/">
-                <Image src={logoImg.src} height={80} width={422} alt="" />
+            <Link className="flex h-12 w-64 md:h-20 md:w-[422px]" href="/">
+                <Image 	
+                    style={{objectFit: "contain", objectPosition: "left"}} 
+                    src={logoImg.src} 
+                    height={80} 
+                    width={422} alt="" 
+                />
             </Link>
-            <div className="flex items-center gap-8">
+            <div className="flex items-center gap-4 md:gap-8">
                 {
                     session ? (
-                        <div className="relative">
+                        <div className="relative flex items-center">
                             <button onClick={() => setOpenSettings(state => !state)}>
                                 {
                                     session.user?.image ?
-                                    <div className="rounded-full overflow-clip outline outline-[3px] outline-offset-[-1.5px] outline-primary">
+                                    <div className="rounded-full overflow-clip h-10 w-10 md:h-14 md:w-14  outline outline-[3px] outline-offset-[-1.5px] outline-primary">
                                         <Image src={session.user.image} alt="" height={59} width={59} /> 
                                     </div> :
-                                    <UserCircle  className="text-primary" weight="fill" height={59} width={59} />
+                                    <UserCircle  className="text-primary h-10 w-10 md:h-14 md:w-14" weight="fill" height={59} width={59} />
                                 }
                             </button>
                             {openSettings ? (
-                                <div className="absolute right-1/2 translate-x-1/2 flex flex-col bg-background rounded border-2 border-primary text-primary font-medium whitespace-nowrap">
+                                <div className="absolute top-12 md:top-16 right-1/2 translate-x-1/2 flex flex-col bg-background rounded border-2 border-primary text-primary font-medium whitespace-nowrap text-sm md:text-base">
                                     <Link className="p-4 h-full flex items-center gap-2 hover:brightness-75" href={'/profile'}>
-                                        <Gear weight="bold" size={22} />
+                                        <Gear className="h-4 w-4 md:h-[22px] md:w-[22px]" weight="bold" size={22} />
                                         Meu perfil
                                     </Link>
                                     <Separator backgroundColor="bg-primary"/>
@@ -48,24 +53,28 @@ export function Header({ pathname }: HeaderProps){
                                         onClick={() => signOut()} 
                                         className="p-4 flex items-center gap-2 hover:brightness-75"
                                     >
-                                            <SignOut weight="bold" size={22} />
+                                            <SignOut className="h-4 w-4 md:h-[22px] md:w-[22px]" weight="bold" size={22} />
                                         Logout
                                     </button>
                                 </div>
                             ) : null}
                         </div>
                     ) : pathname === '/login' ? null : (
-                        <Link className="hover:brightness-90 active:scale-95 font-medium text-2xl text-white bg-primary rounded-full px-[18px] py-3" href='login'>Login</Link>
+                        <Link 
+                            className="hover:brightness-90 active:scale-95 font-medium text-lg md:text-2xl text-white bg-primary rounded-full px-3 md:px-[18px] py-2 md:py-3" href='login'
+                        >
+                            Login
+                        </Link>
                     )
                 }
-                <button 
+                <button  
                     onClick={() => setOpenCart(true)}
                     className="relative"
                 >
                     {
                         pathname === '/login' || pathname === '/checkout' ? null :
                         (<>
-                            <ShoppingCart className="text-primary" weight="fill" height={57} width={57} />
+                            <ShoppingCart className="text-primary h-11 w-11 md:h-14 md:w-14" weight="fill" height={57} width={57} />
                             {
                                 cart.length > 0 ?
                                 <div className="absolute top-[-4px] right-[-2px] bg-primary text-background h-6 w-6 rounded-full outline outline-background font-medium flex items-center justify-center">
