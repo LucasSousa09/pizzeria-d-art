@@ -42,13 +42,13 @@ export function Cart(){
     },[])
     
     return (
-        <div ref={cartRef} className={`fixed top-0 bottom-0 right-0 z-50 flex flex-col justify-between items-center bg-primary text-white w-[440px] ${ !openCart ? 'translate-x-full' : 'translate-x-0' } transition-all`}>
+        <div ref={cartRef} className={`fixed top-0 bottom-0 right-0 z-50 flex flex-col justify-between items-center bg-primary text-white w-[440px] max-w-[100vw] ${ !openCart ? 'translate-x-full' : 'translate-x-0' } transition-all`}>
             <div className="relative w-full">
                 <button onClick={() => setOpenCart(false)} className="absolute top-2 right-2">
                     <X weight='bold' size={32} />
                 </button>
 
-                <div className="mt-12">
+                <div className="flex flex-col gap-3 sm:gap-0 mt-12 px-5 sm:px-0">
                     {
                         cart.length > 0 ?
                         cart.map(cartPizza => <CartPizza 
@@ -67,7 +67,7 @@ export function Cart(){
                 </div>
             </div>
 
-            <footer className="w-[calc((100%)-16px)] mx-2 border-t-white border-t px-5 pt-4 pb-5">
+            <footer className="w-[calc((100%)-16px)] max-w-full mx-2 border-t-white border-t px-5 pt-4 pb-5">
                 <div className="flex justify-between items-center">
                     <strong className="text-xl">Preço Total</strong>
                     <strong className="text-xl">{formatter.format(cart.reduce((cur, acc) => {return cur + (acc.quantity * acc.price / 100)},0))}</strong>
