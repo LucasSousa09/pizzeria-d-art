@@ -25,8 +25,8 @@ export default async function CheckoutPage(){
         }
         
         return (
-            <div className="flex flex-col items-center justify-start h-[calc(100vh-104px)]">
-                <h1 className="mt-12 text-5xl text-primary font-bold">Checkout</h1>
+            <div className="flex flex-col items-center justify-start min-h-screen mt-[60px] md:mt-[104px] 2xl:pb-16">
+                <h1 className="text-primary font-bold mt-6 md:mt-12 mb-6 md:mb-0 text-4xl md:text-5xl">Checkout</h1>
                 
                 <CheckoutForm checkoutProps={checkoutData}/>      
             </div> 

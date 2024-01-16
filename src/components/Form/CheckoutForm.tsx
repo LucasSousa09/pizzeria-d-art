@@ -135,10 +135,10 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
     },[loadingCart, cart])
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-[minmax(0,1fr)_440px] grid-rows-[440px_240px] grid-flow-col gap-x-16 items-center justify-center max-w-[1416px]" >
-            <div>
+        <form onSubmit={handleSubmit(onSubmit)} className="px-5 lg:px-0 2xl:grid 2xl:grid-cols-[minmax(0,1fr)_440px] 2xl:grid-rows-[440px_240px] 2xl:grid-flow-col 2xl:gap-x-16 max-w-full 2xl:max-w-[1416px]" >
+            <div className="mb-6 2xl:mb-0">
                 <strong className="flex font-medium text-2xl text-primary mb-2 leading-normal">Endereço</strong>
-                <div className="bg-primary rounded max-w-[916px] pt-[-4px] px-7 pb-7 grid grid-cols-2 grid-rows-3 grid-flow-col gap-x-16 mb-4">
+                <div className="bg-primary rounded max-w-[916px] pt-1 sm:pt-[-4px] px-7 pb-7 sm:grid sm:grid-cols-2 sm:grid-rows-3 sm:grid-flow-col sm:gap-x-6 md:gap-x-12 mb-4">
                     <InputBox>
                         <Label theme='primary' idFor="street" text='Rua' />
                         <Input disabled theme="primary" id="street" {...register("street")} />
@@ -183,7 +183,7 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
                 </div>
             </div>
 
-            <div>
+            <div className="mb-6 2xl:mb-0">
                 <strong className="flex font-medium text-2xl text-primary mb-2 leading-normal">Meios de pagamento</strong>
                 <div className='max-w-[917px] grid grid-cols-2 gap-5 bg-primary p-7 rounded'>
                     <RadioInput  id='money'  {...register('paymentMethod')} isActive={isActive} setIsActive={setIsActive}>
@@ -219,7 +219,7 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
                 </div>
             </div>
 
-            <div className='flex flex-col h-full row-span-2'>
+            <div className='flex flex-col h-full row-span-2 mb-6 2xl:mb-0'>
                 <strong className="flex font-medium text-2xl text-primary mb-2 leading-normal">Pedidos</strong>
                 <div className="flex flex-col items-center justify-between h-[calc(100%-44px)] bg-primary rounded px-2 pb-7">
                     <div className="scrollbar scrollbar-none text-white w-full overflow-y-auto" >
@@ -231,6 +231,8 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
                             })
                         }
                     </div>
+
+
                     <div className="flex flex-col w-full pt-5">
                         <Separator />
                         <header className="flex items-center w-full pt-4 pb-2 justify-between px-3">

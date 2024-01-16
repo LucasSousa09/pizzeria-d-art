@@ -31,7 +31,7 @@ export const RadioInput = forwardRef<HTMLInputElement, RadioInputProps>(({ id, c
                 disabled={id === 'debit'}
             /> 
             <label 
-                className={`relative cursor-pointer p-3 group ${isActive === id ? 'is-active': ''}  peer-checked:text-primary peer-disabled:bg-background peer-disabled:cursor-not-allowed peer-checked:bg-white flex justify-center items-center gap-3 text-white w-full h-full text-2xl font-medium`} 
+                className={`relative group font-medium text-center text-white text-sm sm:text-2xl peer-checked:text-primary peer-checked:bg-white peer-disabled:bg-background peer-disabled:cursor-not-allowed cursor-pointer flex justify-center items-center gap-3 w-full h-full p-3 ${isActive === id ? 'is-active': ''}`} 
                 htmlFor={id}
             >
                 {

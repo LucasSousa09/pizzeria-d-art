@@ -26,11 +26,11 @@ export function CartPizza({ pizzaImg, pizzaName, price, quantity, onCheckout = f
 
     return (
         <>
-            <div className={`flex gap-5 mx-2 p-5 ${!onCheckout && 'border-t'} ${!onCheckout && 'border-t-white'}`}>
-                <Image src={pizzaImg} alt="" height={100} width={100} />
+            <div className={`flex items-center gap-5 sm:mx-2 py-2 sm:p-5 ${!onCheckout && 'border-t'} ${!onCheckout && 'border-t-white'}`}>
+                <Image className="h-20 w-20" src={pizzaImg} alt="" height={100} width={100} />
                 <div className="flex-grow flex-1">
                     <div className="flex items-center justify-between">
-                        <strong className="text-lg ">{pizzaName}</strong>
+                        <strong className="sm:text-lg">{pizzaName}</strong>
                         <button 
                             onClick={() => removePizzaFromCart(pizzaName)}
                             className='hover:text-red-900'
@@ -40,10 +40,10 @@ export function CartPizza({ pizzaImg, pizzaName, price, quantity, onCheckout = f
 
                     </div>
                     <div className="grid grid-cols-2 gap-y-1 mt-3">
-                        <span className="font-medium">Preço</span>
-                        <strong className="font-medium text-end">{formatter.format(price/100*cartQuantity)}</strong>
+                        <span className="font-medium text-sm sm:text-base">Preço</span>
+                        <strong className="font-medium text-sm sm:text-base text-end">{formatter.format(price/100*cartQuantity)}</strong>
 
-                        <span className="font-medium">Quantidade</span>
+                        <span className="font-medium text-sm sm:text-base">Quantidade</span>
                         <Quantity onCart pizzaName={pizzaName} quantity={cartQuantity} setQuantity={setCartQuantity} size='sm'/>
                     </div>
                 </div>
