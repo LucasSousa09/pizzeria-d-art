@@ -44,7 +44,7 @@ export function Header({ pathname }: HeaderProps){
                             </button>
                             {openSettings ? (
                                 <div className="absolute top-12 md:top-16 right-1/2 translate-x-1/2 flex flex-col bg-background rounded border-2 border-primary text-primary font-medium whitespace-nowrap text-sm md:text-base">
-                                    <Link className="p-4 h-full flex items-center gap-2 hover:brightness-75" href={'/profile'}>
+                                    <Link onClick={() => setOpenSettings(state => !state)} className="p-4 h-full flex items-center gap-2 hover:brightness-75" href={'/profile'}>
                                         <Gear className="h-4 w-4 md:h-[22px] md:w-[22px]" weight="bold" size={22} />
                                         Meu perfil
                                     </Link>
