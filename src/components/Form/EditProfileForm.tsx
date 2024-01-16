@@ -174,7 +174,7 @@ export function EditProfileForm({profileData}: FormProps){
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center'>
-            <div className='mt-16 grid grid-rows-4 grid-flow-col max-w-[1321px] gap-x-[60px]'>
+            <div className='md:mt-16 md:grid md:grid-rows-6 lg:grid-rows-4 md:grid-cols-2 lg:grid-cols-3 grid-rows-4 grid-flow-col max-w-[1321px] gap-x-[60px]'>
                 <InputBox>
                     <Label idFor="name" text="Nome" />
                     <Input  id="name" {...register("name")} />
@@ -210,7 +210,7 @@ export function EditProfileForm({profileData}: FormProps){
                     <ZipCodeInput id="zipCode" {...register("zipCode")}/> 
                 </InputBox>
 
-                <div className="flex gap-7">
+                <div className="flex  gap-7">
                     <InputBox size="sm">
                         <Label idFor="houseNumber" text="Número" />
                         <Input id="houseNumber" type="number" {...register("houseNumber", { valueAsNumber: true })} />
@@ -242,7 +242,7 @@ export function EditProfileForm({profileData}: FormProps){
             <button 
                 type="submit"
                 disabled={isSendingProfileUpdates} 
-                className="disabled:brightness-75 disabled:cursor-not-allowed hover:brightness-90 active:scale-95 mt-32 bg-primary text-white font-bold text-2xl px-4 py-3 rounded w-fit"
+                className="disabled:brightness-75 disabled:cursor-not-allowed hover:brightness-90 active:scale-95 mt-12 lg:mt-32 mb-6 lg:mb-0 bg-primary text-white font-bold text-2xl px-4 py-3 rounded w-fit"
             >
                 {
                     isSendingProfileUpdates ? (
