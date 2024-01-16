@@ -52,16 +52,16 @@ export function Quantity({ size, quantity, setQuantity, pizzaName, onCart = fals
                 onClick={addQuantity} 
                 className="bg-white text-primary rounded hover:brightness-90 active:scale-95"
             >
-                <Plus size={`${size === 'sm' ? '20' : '24'}`} weight='bold'/>
+                <Plus className={`${size === 'sm' && 'h-5 w-5'} ${size === 'default' && 'h-6 w-6 xs:h-5 xs:w-5 sm:h-6 sm:w-6'}`} weight='bold'/>
             </button>
 
-            <span className={`flex items-center border-white border-2 px-1 max-h-full min-w-[25px] rounded text-center ${size === 'sm' ? 'text-sm' : 'text-xl pt-[1px]'}  font-medium`}>{quantity}</span>
+            <span className={`flex items-center justify-center min-w-[20px] max-h-full xs:h-5 sm:h-full px-1 border-white border-2  rounded text-center ${size === 'sm' ? 'text-sm' : 'text-xl xs:text-base sm:text-xl'} font-medium`}>{quantity}</span>
             
             <button
                 type='button' 
                 onClick={diminishQuantity} 
                 className="bg-white text-primary rounded hover:brightness-90 active:scale-95">
-                <Minus size={`${size === 'sm' ? '20' : '24'}`} weight='bold'/>
+                <Minus className={`${size === 'sm' && 'h-5 w-5'} ${size === 'default' && 'h-6 w-6 xs:h-5 xs:w-5 sm:h-6 sm:w-6'}`} weight='bold'/>
             </button>
         </div>
     )

@@ -20,7 +20,12 @@ export default function Home({
     <main>
       <ToastError error={error} />
       <Slider />
-      <strong className="flex gap-6 mx-auto mt-12 mb-16 font-semibold text-5xl text-primary items-center justify-center" >Peça a sua pizza agora <CaretDoubleDown weight="bold" size={56}/> </strong>
+      <strong 
+        className="flex items-center justify-center sm:gap-3 md:gap-6 mx-auto mt-8 sm:mt-10 md:mt-12 mb-8 sm:mb-10 md:mb-16 text-primary font-semibold text-2xl sm:text-3xl md:text-5xl" 
+      >
+        Peça a sua pizza agora 
+        <CaretDoubleDown className="h-7 sm:h-9 md:h-14" weight="bold" size={56}/> 
+      </strong>
       <CardContainer />
     </main>
   )

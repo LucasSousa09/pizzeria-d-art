@@ -16,7 +16,7 @@ import { SliderSlide } from './SliderSlide';
 export function Slider(){
     return (
         <Swiper
-            className='mt-[104px]'
+            className='h-[calc(100vh-60px)] sm:h-[460px] md:h-[600px] mt-[60px] md:mt-[104px]'
             modules={[Pagination, Autoplay]}
             spaceBetween={0}
             slidesPerView={1}

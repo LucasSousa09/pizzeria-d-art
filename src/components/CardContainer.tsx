@@ -27,7 +27,7 @@ export async function CardContainer(){
     const pizzas = await getPizzasFromStripe()
 
     return (
-        <div className="grid grid-cols-4 max-w-[1456px] items-center justify-center mb-16 mx-auto gap-20">
+        <div className="grid xs:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 content-center justify-items-center gap-y-10 xs:gap-2 sm:gap-10 md:gap-4 lg:gap-12 2xl:gap-20 max-w-[1456px] xs:px-2 mb-16 2xl:mx-auto">
            {
             pizzas.length > 0 ?
             pizzas.map(pizza => {

@@ -21,7 +21,7 @@ export function Header({ pathname }: HeaderProps){
 
     return (
         <>
-            <Link className="flex h-12 w-64 md:h-20 md:w-[422px]" href="/">
+            <Link className="flex h-11 w-60 md:h-20 md:w-[422px]" href="/">
                 <Image 	
                     style={{objectFit: "contain", objectPosition: "left"}} 
                     src={logoImg.src} 
@@ -29,7 +29,7 @@ export function Header({ pathname }: HeaderProps){
                     width={422} alt="" 
                 />
             </Link>
-            <div className="flex items-center gap-4 md:gap-8">
+            <div className="flex items-center gap-2 md:gap-8">
                 {
                     session ? (
                         <div className="relative flex items-center">
@@ -61,7 +61,7 @@ export function Header({ pathname }: HeaderProps){
                         </div>
                     ) : pathname === '/login' ? null : (
                         <Link 
-                            className="hover:brightness-90 active:scale-95 font-medium text-lg md:text-2xl text-white bg-primary rounded-full px-3 md:px-[18px] py-2 md:py-3" href='login'
+                            className="hover:brightness-90 active:scale-95 font-medium text-base md:text-2xl text-white bg-primary rounded-full px-3 md:px-[18px] py-2 md:py-3" href='login'
                         >
                             Login
                         </Link>
