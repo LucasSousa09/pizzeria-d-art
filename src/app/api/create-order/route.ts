@@ -15,10 +15,12 @@ export async function POST(req: Request) {
                 id: true
             }
         })
- 
+
         const body: {cart: CartItemProps[], paymentMethod: string} = await req.json()
- 
+
         const totalPrice = body.cart.reduce((acc, cur) => acc + (cur.price * cur.quantity),0)
+
+        console.log(JSON.stringify(body.cart))
 
         const orderId = await prisma.order.create({
             data: {
@@ -37,7 +39,7 @@ export async function POST(req: Request) {
         return Response.json({orderId})
     }
     catch(err){
-        return new Response('Failure at creating the order', {
+        return new Response(JSON.stringify(err), {
             status: 402
         })
     }
