@@ -17,8 +17,8 @@ export async function POST(req: Request) {
       const session = await stripe.checkout.sessions.create({
           line_items: body.listItems.map((lineItem: {price: string, quantity: number}) => lineItem ),
           mode: 'payment',
-          success_url: `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}&order_id=${body.data.orderId.id}`,
-          cancel_url: `http://localhost:3000/checkout`,
+          success_url: `https://pizzeria-d-art.vercel.app/success?session_id={CHECKOUT_SESSION_ID}&order_id=${body.data.orderId.id}`,
+          cancel_url: `https://pizzeria-d-art.vercel.app/checkout`,
         });
       
         return Response.json({checkoutSession: session.url})
