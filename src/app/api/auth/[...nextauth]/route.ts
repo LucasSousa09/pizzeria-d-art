@@ -28,8 +28,6 @@ const authOptions: NextAuthOptions = {
                     }
                 })
 
-                console.log(emailFound)
-
                 if(emailFound === null){
                     if(email && name){
                         await prisma.user.create({
@@ -44,7 +42,8 @@ const authOptions: NextAuthOptions = {
 
                 return true
             }
-            catch {
+            catch(err) {
+                console.log(err)
                 return false
             }
         },
