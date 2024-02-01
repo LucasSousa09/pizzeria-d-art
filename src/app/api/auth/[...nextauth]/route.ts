@@ -21,6 +21,7 @@ const authOptions: NextAuthOptions = {
     callbacks: {
         async signIn({ user }) {
             const { name, email, image } = user
+            console.log(email)
             try {
                 const emailFound = await prisma.user.findUnique({
                     where: {
