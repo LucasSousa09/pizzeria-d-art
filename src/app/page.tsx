@@ -1,8 +1,9 @@
-import { PizzaCardsContainer } from "../components/PizzaCard/PizzaCardsContainer"
-import { Slider } from "../components/Slider";
-
 import { CaretDoubleDown } from '@phosphor-icons/react/dist/ssr'
+
+import { Slider } from "../components/Slider";
 import { ToastError } from "@/components/ToastError";
+import { PizzaCardsContainer } from "../components/PizzaCard/PizzaCardsContainer"
+
 
 export default function Home({
   searchParams

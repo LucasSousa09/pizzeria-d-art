@@ -1,18 +1,17 @@
-import './globals.css'
-
 import { getServerSession } from 'next-auth'
-
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 
 import { poppins } from './fonts'
 
-import { Cart } from '../components/Cart'
-import { Footer } from '../components/Footer'
-import { HeaderContainer } from '../components/Header/HeaderContainer'
 import { CartContextProvider } from '../contexts/CartContextProvider'
 
+import { Cart } from '../components/Cart'
+import { Footer } from '../components/Footer'
 import SessionProvider from '../components/SessionProvider'
+import { HeaderContainer } from '../components/Header/HeaderContainer'
+
+import './globals.css'
 
 export default async function RootLayout({
   children,

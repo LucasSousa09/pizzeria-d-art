@@ -1,15 +1,15 @@
 'use client'
 
 import Image from "next/image";
-import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import { GoogleLogo, GithubLogo } from '@phosphor-icons/react/dist/ssr'
-
-import bgImg from '../../assets/abbie-tanner.png'
-
-import { italianno } from '../fonts'
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { GoogleLogo, GithubLogo } from '@phosphor-icons/react/dist/ssr';
+
+import bgImg from '../../assets/abbie-tanner.png';
+
+import { italianno } from '../fonts';
 
 export default function Login(){
     const searchParams = useSearchParams()

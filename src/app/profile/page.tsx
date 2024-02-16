@@ -3,8 +3,9 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { PencilSimple } from "@phosphor-icons/react/dist/ssr";
 
-import { ProfileBox } from "../../components/ProfileBox";
 import { Order } from "../../components/Order";
+import { ProfileBox } from "../../components/ProfileBox";
+
 import { prisma } from "@/lib/prisma";
 
 export type Pizza = {
