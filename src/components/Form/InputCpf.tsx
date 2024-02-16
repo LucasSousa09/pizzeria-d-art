@@ -11,7 +11,7 @@ type InputProps = {
     type?: 'text' | 'number'
 }
 
-export const CpfInput = forwardRef<HTMLInputElement, InputProps>(({id, name, onBlur, onChange, type = 'text', ...rest}, ref) => {
+export const InputCpf = forwardRef<HTMLInputElement, InputProps>(({id, name, onBlur, onChange, type = 'text', ...rest}, ref) => {
     return(
         <IMaskInput
             mask="000.000.000-00"

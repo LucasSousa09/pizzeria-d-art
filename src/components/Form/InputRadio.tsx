@@ -13,7 +13,7 @@ type RadioInputProps = {
     setIsActive: Dispatch<SetStateAction<string>>
 }
 
-export const RadioInput = forwardRef<HTMLInputElement, RadioInputProps>(({ id, children, onChange, onBlur, name, isActive, setIsActive}, ref ) => {
+export const InputRadio = forwardRef<HTMLInputElement, RadioInputProps>(({ id, children, onChange, onBlur, name, isActive, setIsActive}, ref ) => {
     
     
     return (

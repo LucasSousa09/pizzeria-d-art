@@ -12,10 +12,10 @@ import { api } from '../../lib/axios';
 import { Label } from "./Label";
 import { Input } from "./Input";
 import { InputBox } from "./InputBox";
-import { CpfInput } from './CpfInput';
+import { InputCpf } from './InputCpf';
 import { TextArea } from "./TextArea";
-import { PhoneInput } from './PhoneInput';
-import { ZipCodeInput } from './ZipCodeInput';
+import { InputPhone } from './InputPhone';
+import { InputZipCode } from './InputZipCode';
 
 import type { ProfileDataProps } from '../../app/profile/edit/page'
 
@@ -70,7 +70,7 @@ type FormProps = {
     profileData?: ProfileDataProps
 }
 
-export function EditProfileForm({profileData}: FormProps){
+export function FormEditProfile({profileData}: FormProps){
     const [isSendingProfileUpdates, setIsSendingProfileUpdates] = useState(false)
 
     const {
@@ -180,12 +180,12 @@ export function EditProfileForm({profileData}: FormProps){
 
                 <InputBox>
                     <Label idFor="cpf" text="Cpf" />
-                    <CpfInput id="cpf" {...register("cpf")} />
+                    <InputCpf id="cpf" {...register("cpf")} />
                 </InputBox>
 
                 <InputBox>
                     <Label idFor="phone" text="Telefone" />
-                    <PhoneInput id="phone" {...register("phone")} />
+                    <InputPhone id="phone" {...register("phone")} />
                 </InputBox>
 
                 <InputBox>
@@ -205,7 +205,7 @@ export function EditProfileForm({profileData}: FormProps){
 
                 <InputBox>
                     <Label idFor="zipCode" text="Cep" />
-                    <ZipCodeInput id="zipCode" {...register("zipCode")}/> 
+                    <InputZipCode id="zipCode" {...register("zipCode")}/> 
                 </InputBox>
 
                 <div className="flex  gap-7">

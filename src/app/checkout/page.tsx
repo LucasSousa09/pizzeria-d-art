@@ -5,7 +5,7 @@ import { getProfileData } from '@/utils/getProfileData';
 
 import type { ProfileDataProps } from '../profile/edit/page';
 
-import { CheckoutForm } from '@/components/Form/CheckoutForm';
+import { FormCheckout } from '@/components/Form/FormCheckout';
 
 export default async function CheckoutPage(){
     const session = await getServerSession()
@@ -28,7 +28,7 @@ export default async function CheckoutPage(){
             <div className="flex flex-col items-center justify-start min-h-screen mt-[60px] md:mt-[104px] 2xl:pb-16">
                 <h1 className="text-primary font-bold mt-6 md:mt-12 mb-6 md:mb-0 text-4xl md:text-5xl">Checkout</h1>
                 
-                <CheckoutForm checkoutProps={checkoutData}/>      
+                <FormCheckout checkoutProps={checkoutData}/>      
             </div> 
         )
     }

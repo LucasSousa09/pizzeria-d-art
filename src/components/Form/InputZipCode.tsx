@@ -11,7 +11,7 @@ type InputProps = {
     type?: 'text' | 'number'
 }
 
-export const ZipCodeInput = forwardRef<HTMLInputElement, InputProps>(({id, name, onBlur, onChange, type = 'text'}, ref) => {
+export const InputZipCode = forwardRef<HTMLInputElement, InputProps>(({id, name, onBlur, onChange, type = 'text'}, ref) => {
     return(
         <IMaskInput
             mask="00000-000"

@@ -17,7 +17,7 @@ import { Input } from "./Input";
 import { Label } from './Label';
 import { InputBox } from "./InputBox";
 import { Separator } from '../Separator';
-import { RadioInput } from './RadioInput';
+import { InputRadio } from './InputRadio';
 import { CartPizza } from '../Cart/CartPizza';
 
 const CheckoutSchema = zod.object({
@@ -43,7 +43,7 @@ const CheckoutSchema = zod.object({
 
 type CheckoutData = zod.infer<typeof CheckoutSchema>
 
-type CheckoutFormProps = {
+type FormCheckoutProps = {
     checkoutProps?: {
         street?: string | null,
         district?: string | null,
@@ -56,7 +56,7 @@ type CheckoutFormProps = {
     }
 }
 
-export function CheckoutForm({checkoutProps}: CheckoutFormProps){
+export function FormCheckout({checkoutProps}: FormCheckoutProps){
     const { cart, loadingCart, setLoadingCart } = useContext(CartContext)
     const [ isActive, setIsActive ] = useState('')
     const [ isCreatingCheckout, setIsCreatingCheckout ] = useState(false)
@@ -186,12 +186,12 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
             <div className="mb-6 2xl:mb-0">
                 <strong className="flex font-medium text-2xl text-primary mb-2 leading-normal">Meios de pagamento</strong>
                 <div className='max-w-[917px] grid grid-cols-2 gap-5 bg-primary p-7 rounded'>
-                    <RadioInput  id='money'  {...register('paymentMethod')} isActive={isActive} setIsActive={setIsActive}>
+                    <InputRadio  id='money'  {...register('paymentMethod')} isActive={isActive} setIsActive={setIsActive}>
                         <Money size={32}/>
                         Dinheiro
-                    </RadioInput>
+                    </InputRadio>
 
-                    <RadioInput  id='pix' {...register('paymentMethod')} isActive={isActive} setIsActive={setIsActive}>
+                    <InputRadio  id='pix' {...register('paymentMethod')} isActive={isActive} setIsActive={setIsActive}>
                         
                         <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_20_554)">
@@ -205,17 +205,17 @@ export function CheckoutForm({checkoutProps}: CheckoutFormProps){
                         </svg>
 
                         PIX
-                    </RadioInput>
+                    </InputRadio>
                     
-                    <RadioInput  id='credit' {...register('paymentMethod')} isActive={isActive} setIsActive={setIsActive}>
+                    <InputRadio  id='credit' {...register('paymentMethod')} isActive={isActive} setIsActive={setIsActive}>
                         <CreditCard size={32}/>
                         Cartão de Crédito
-                    </RadioInput>
+                    </InputRadio>
 
-                    <RadioInput  id='debit' {...register('paymentMethod')} isActive={isActive} setIsActive={setIsActive}>
+                    <InputRadio  id='debit' {...register('paymentMethod')} isActive={isActive} setIsActive={setIsActive}>
                         <Bank size={32}/>
                         Cartão de Débito
-                    </RadioInput>
+                    </InputRadio>
                 </div>
             </div>
 

@@ -10,7 +10,7 @@ type InputProps = {
     type?: 'text' | 'number'
 }
 
-export const PhoneInput = forwardRef<HTMLInputElement, InputProps>(({id, name, onBlur, onChange, type = 'text'}, ref) => {
+export const InputPhone = forwardRef<HTMLInputElement, InputProps>(({id, name, onBlur, onChange, type = 'text'}, ref) => {
     return(
         <IMaskInput
             mask="(00)00000-0000"
