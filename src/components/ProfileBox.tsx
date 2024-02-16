@@ -1,6 +1,7 @@
 'use client'
 
 import { ReactNode } from "react"
+
 import { useHorizontalScroll } from "@/hooks/useHorizontalScroll"
 
 type ProfileBoxProps = {

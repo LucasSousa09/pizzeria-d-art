@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import { useContext, useState } from "react";
-import { Trash } from '@phosphor-icons/react'
+import { Trash } from '@phosphor-icons/react';
 
 import { formatter } from "@/lib/formatter";
 
+import { CartContext } from "@/contexts/CartContextProvider";
+
 import { Quantity } from "../Quantity";
 import { Separator } from "../Separator";
-import { CartContext } from "@/contexts/CartContextProvider";
 
 
 type CartPizzaProps = {

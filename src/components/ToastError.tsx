@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { useContext, useEffect } from "react";
 
-import { useContext } from "react";
 import { CartContext } from "@/contexts/CartContextProvider";
 
 export function ToastError(props:{ error: string }){

@@ -1,24 +1,24 @@
 'use client'
 
 import * as zod from 'zod'
-
-import { Input } from "./Input";
-import { Label } from './Label';
-import { InputBox } from "./InputBox";
-import { RadioInput } from './RadioInput';
-import { CartPizza } from '../Cart/CartPizza';
-import { Separator } from '../Separator';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext, useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Money, CreditCard , Bank, ArrowClockwise  } from '@phosphor-icons/react';
 
 import { api } from '@/lib/axios';
 import { formatter } from '@/lib/formatter';
 
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '@/contexts/CartContextProvider';
-import { Money, CreditCard , Bank, ArrowClockwise  } from '@phosphor-icons/react';
+
+import { Input } from "./Input";
+import { Label } from './Label';
+import { InputBox } from "./InputBox";
+import { Separator } from '../Separator';
+import { RadioInput } from './RadioInput';
+import { CartPizza } from '../Cart/CartPizza';
 
 const CheckoutSchema = zod.object({
     street: zod.string()

@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
+import { IMaskInput } from 'react-imask'
 import { ChangeHandler } from "react-hook-form"
 
-import { IMaskInput } from 'react-imask'
 
 type InputProps = {
     id: string,

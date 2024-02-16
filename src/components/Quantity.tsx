@@ -1,8 +1,9 @@
 'use client'
 
-import { CartContext } from '@/contexts/CartContextProvider'
 import { Plus, Minus } from '@phosphor-icons/react'
-import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useContext, useEffect } from 'react'
+
+import { CartContext } from '@/contexts/CartContextProvider'
 
 type QuantityProps = {
     size: 'sm' | 'default'

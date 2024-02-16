@@ -3,10 +3,12 @@
 import Image from "next/image";
 import { useContext, useState } from "react";
 
+import { formatter } from "../../lib/formatter";
+
+import { CartContext } from "@/contexts/CartContextProvider";
+
 import { Quantity } from "../Quantity";
 
-import { formatter } from "../../lib/formatter";
-import { CartContext } from "@/contexts/CartContextProvider";
 
 type PizzaCardProps = {
     id: string,

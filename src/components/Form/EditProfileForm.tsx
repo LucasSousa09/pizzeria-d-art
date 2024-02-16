@@ -1,25 +1,23 @@
 'use client'
 
 import * as zod from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-
-import { useEffect, useState } from 'react';
-import { useForm, SubmitHandler } from "react-hook-form"
-
 import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ArrowClockwise } from '@phosphor-icons/react'
+import { useForm, SubmitHandler } from "react-hook-form"
 
 import { api } from '../../lib/axios';
 
-import { InputBox } from "./InputBox";
 import { Label } from "./Label";
 import { Input } from "./Input";
+import { InputBox } from "./InputBox";
 import { CpfInput } from './CpfInput';
+import { TextArea } from "./TextArea";
 import { PhoneInput } from './PhoneInput';
 import { ZipCodeInput } from './ZipCodeInput';
-import { TextArea } from "./TextArea";
 
 import type { ProfileDataProps } from '../../app/profile/edit/page'
-import { ArrowClockwise } from '@phosphor-icons/react';
 
 const UserInfoSchema = zod.object({
     name: zod.string()

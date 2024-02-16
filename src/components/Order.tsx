@@ -3,13 +3,13 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { format } from 'date-fns'
-import { CaretDoubleDown } from '@phosphor-icons/react/dist/ssr'
+import { CaretDoubleUp, CaretDoubleDown } from '@phosphor-icons/react'
 
 import { formatter } from '@/lib/formatter'
 
-import type { Pizza } from '../app/profile/page'
 import { Separator } from './Separator'
-import { CaretDoubleUp } from '@phosphor-icons/react'
+
+import type { Pizza } from '../app/profile/page'
 
 type OrderProps = {
     pizzaImage: string,

@@ -6,10 +6,12 @@ import { X, SmileyXEyes } from '@phosphor-icons/react'
 
 import { CartContext } from '../../contexts/CartContextProvider'
 
-import { CartPizza } from './CartPizza'
 import { formatter } from '@/lib/formatter'
 
 import { useOnClickOutside } from '@/hooks/useOnClickOutside'
+
+import { CartPizza } from './CartPizza'
+
 
 export function Cart(){
     const { openCart, setOpenCart, cart, getCartFromLocalStorage } = useContext(CartContext)

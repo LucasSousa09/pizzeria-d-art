@@ -1,14 +1,16 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link"
-
 import { useContext, useState } from "react";
 import { signOut, useSession } from "next-auth/react"; 
-import { ShoppingCart, SignOut, UserCircle, Gear } from '@phosphor-icons/react/dist/ssr'
+import { ShoppingCart, SignOut, UserCircle, Gear } from '@phosphor-icons/react'
 
 import { CartContext } from "../../contexts/CartContextProvider";
 
-import logoImg from "../assets/Logo.png"
 import { Separator } from "../Separator";
+
+import logoImg from "../assets/Logo.png"
 
 interface HeaderProps {
     pathname: string
