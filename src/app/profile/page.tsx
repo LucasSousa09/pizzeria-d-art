@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { PencilSimple } from "@phosphor-icons/react/dist/ssr";
 
 import { ProfileBox } from "../../components/ProfileBox";
-import { PurchasedItem } from "../../components/PurchasedItem";
+import { Order } from "../../components/Order";
 import { prisma } from "@/lib/prisma";
 
 export type Pizza = {
@@ -55,7 +55,7 @@ export default async function Profile(){
                 <ProfileBox label='Meus Pedidos'>
                     {
                         orders.length > 0 && (
-                            orders.map(order => <PurchasedItem 
+                            orders.map(order => <Order 
                                                     key={order.id} 
                                                     createdAt={order.createdAt} 
                                                     pizzaImage={order.firstPizzaImg} 

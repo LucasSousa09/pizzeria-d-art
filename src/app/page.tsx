@@ -1,4 +1,4 @@
-import { CardContainer } from "../components/CardContainer";
+import { PizzaCardsContainer } from "../components/PizzaCard/PizzaCardsContainer"
 import { Slider } from "../components/Slider";
 
 import { CaretDoubleDown } from '@phosphor-icons/react/dist/ssr'
@@ -26,7 +26,7 @@ export default function Home({
         Peça a sua pizza agora 
         <CaretDoubleDown className="h-7 sm:h-9 md:h-14" weight="bold" size={56}/> 
       </strong>
-      <CardContainer />
+      <PizzaCardsContainer />
     </main>
   )
 }

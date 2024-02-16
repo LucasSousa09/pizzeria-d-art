@@ -9,7 +9,7 @@ import { poppins } from './fonts'
 
 import { Cart } from '../components/Cart'
 import { Footer } from '../components/Footer'
-import { HeaderContainer } from '../components/HeaderContainer'
+import { HeaderContainer } from '../components/Header/HeaderContainer'
 import { CartContextProvider } from '../contexts/CartContextProvider'
 
 import SessionProvider from '../components/SessionProvider'
