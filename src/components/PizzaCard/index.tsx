@@ -3,19 +3,19 @@
 import Image from "next/image";
 import { useContext, useState } from "react";
 
-import { Quantity } from "./Quantity";
+import { Quantity } from "../Quantity";
 
-import { formatter } from "../lib/formatter";
+import { formatter } from "../../lib/formatter";
 import { CartContext } from "@/contexts/CartContextProvider";
 
-type CardProps = {
+type PizzaCardProps = {
     id: string,
     pizzaName: string,
     price: number,
     pizzaImg: string,
 }
 
-export function Card({ pizzaName, price, pizzaImg, id }: CardProps) {
+export function PizzaCard({ pizzaName, price, pizzaImg, id }: PizzaCardProps) {
     const [ quantity, setQuantity ] = useState(0)
 
     const { addPizzaToCart } = useContext(CartContext)

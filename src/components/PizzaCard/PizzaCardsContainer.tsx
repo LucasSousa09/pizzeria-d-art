@@ -1,7 +1,7 @@
 import { cache } from "react";
-import { stripe } from "../lib/stripe";
+import { stripe } from "../../lib/stripe";
 
-import { Card } from "./Card";
+import { PizzaCard } from ".";
 import Stripe from "stripe";
 
 export const revalidate = 3600 
@@ -16,7 +16,7 @@ const getPizzasFromStripe = cache(async () => {
     return data
 })
 
-export async function CardContainer(){
+export async function PizzaCardsContainer(){
     const pizzasData = await getPizzasFromStripe()
     
     const pizzas = pizzasData.map(pizza => {
@@ -36,7 +36,7 @@ export async function CardContainer(){
             pizzas.length > 0 ?
             pizzas.map(pizza => {
                 return (
-                    <Card key={pizza.id} id={pizza.id} pizzaName={pizza.name} price={pizza.price} pizzaImg={pizza.image} />
+                    <PizzaCard key={pizza.id} id={pizza.id} pizzaName={pizza.name} price={pizza.price} pizzaImg={pizza.image} />
                 )
             }) :
             <strong>Não há pizzas cadastradas</strong>
