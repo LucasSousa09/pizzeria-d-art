@@ -10,7 +10,7 @@ import { CartContext } from "../../contexts/CartContextProvider";
 
 import { Separator } from "../Separator";
 
-import logoImg from "../assets/Logo.png"
+import logoImg from "../../assets/Logo.png"
 
 interface HeaderProps {
     pathname: string
