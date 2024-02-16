@@ -5,10 +5,10 @@ import { useContext, useState } from "react";
 import { signOut, useSession } from "next-auth/react"; 
 import { ShoppingCart, SignOut, UserCircle, Gear } from '@phosphor-icons/react/dist/ssr'
 
-import { CartContext } from "../contexts/CartContextProvider";
+import { CartContext } from "../../contexts/CartContextProvider";
 
 import logoImg from "../assets/Logo.png"
-import { Separator } from "./Separator";
+import { Separator } from "../Separator";
 
 interface HeaderProps {
     pathname: string

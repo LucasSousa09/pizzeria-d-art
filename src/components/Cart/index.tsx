@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useRef } from 'react'
 import { X, SmileyXEyes } from '@phosphor-icons/react'
 
-import { CartContext } from '../contexts/CartContextProvider'
+import { CartContext } from '../../contexts/CartContextProvider'
 
 import { CartPizza } from './CartPizza'
 import { formatter } from '@/lib/formatter'

@@ -6,8 +6,8 @@ import { Trash } from '@phosphor-icons/react'
 
 import { formatter } from "@/lib/formatter";
 
-import { Quantity } from "./Quantity";
-import { Separator } from "./Separator";
+import { Quantity } from "../Quantity";
+import { Separator } from "../Separator";
 import { CartContext } from "@/contexts/CartContextProvider";
 
 
