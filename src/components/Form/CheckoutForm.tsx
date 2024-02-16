@@ -6,7 +6,7 @@ import { Input } from "./Input";
 import { Label } from './Label';
 import { InputBox } from "./InputBox";
 import { RadioInput } from './RadioInput';
-import { CartPizza } from '../CartPizza';
+import { CartPizza } from '../Cart/CartPizza';
 import { Separator } from '../Separator';
 
 import { api } from '@/lib/axios';
