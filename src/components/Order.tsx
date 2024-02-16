@@ -11,7 +11,7 @@ import type { Pizza } from '../app/profile/page'
 import { Separator } from './Separator'
 import { CaretDoubleUp } from '@phosphor-icons/react'
 
-type PurchasedItemProps = {
+type OrderProps = {
     pizzaImage: string,
     createdAt: Date,
     totalPrice: number,
@@ -20,7 +20,7 @@ type PurchasedItemProps = {
     pizzas: Pizza[]
 } 
 
-export function PurchasedItem({ pizzaImage, createdAt, totalPrice, paymentType, status, pizzas }: PurchasedItemProps){
+export function Order({ pizzaImage, createdAt, totalPrice, paymentType, status, pizzas }: OrderProps){
     const date = format(createdAt, 'dd/MM/yyyy')
     const hours = format(createdAt, 'hh:mm')
 
