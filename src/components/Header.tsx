@@ -3,26 +3,26 @@
 import Image from "next/image";
 import Link from "next/link"
 import { useContext, useState } from "react";
+import { usePathname } from 'next/navigation';
 import { signOut, useSession } from "next-auth/react"; 
 import { ShoppingCart, SignOut, UserCircle, Gear } from '@phosphor-icons/react'
 
-import { CartContext } from "../../contexts/CartContextProvider";
+import { CartContext } from "../contexts/CartContextProvider";
 
-import { Separator } from "../Separator";
+import { Separator } from "./Separator";
 
 import logoImg from "../../assets/Logo.png"
 
-interface HeaderProps {
-    pathname: string
-}
 
-export function Header({ pathname }: HeaderProps){
+export function Header(){
     const [ openSettings, setOpenSettings ] = useState(false)
     const { data: session } = useSession()
     const { setOpenCart, cart } = useContext(CartContext)
 
+    const pathname = usePathname()
+
     return (
-        <>
+        <header className={`fixed bg-background top-0 left-0 right-0 z-50 flex items-center justify-between gap-3 px-3 md:px-6 lg:px-12 py-2 lg:py-3 ${pathname === '/login' && 'xl:w-1/2'}`}>
             <Link className="flex h-11 w-60 md:h-20 md:w-[422px]" href="/">
                 <Image 	
                     style={{objectFit: "contain", objectPosition: "left"}} 
@@ -88,6 +88,6 @@ export function Header({ pathname }: HeaderProps){
                     
                 </button>
             </div>
-        </>
+        </header>
     )
 }

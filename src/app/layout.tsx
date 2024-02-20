@@ -7,9 +7,9 @@ import { poppins } from './fonts'
 import { CartContextProvider } from '../contexts/CartContextProvider'
 
 import { Cart } from '../components/Cart'
+import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import SessionProvider from '../components/SessionProvider'
-import { HeaderContainer } from '../components/Header/HeaderContainer'
 
 import './globals.css'
 
@@ -27,7 +27,7 @@ export default async function RootLayout({
         <div className="max-w-1920 w-full">
           <SessionProvider session={session}>
             <CartContextProvider>
-              <HeaderContainer />
+              <Header />
               <Cart />
               <ToastContainer position='bottom-right' theme='colored' />
 
