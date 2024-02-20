@@ -22,7 +22,7 @@ export function Header(){
     const pathname = usePathname()
 
     return (
-        <header className={`fixed bg-background top-0 left-0 right-0 z-50 flex items-center justify-between gap-3 px-3 md:px-6 lg:px-12 py-2 lg:py-3 ${pathname === '/login' && 'xl:w-1/2'}`}>
+        <header className={`fixed bg-background max-w-1920 mx-auto top-0 left-0 right-0 z-50 flex items-center justify-between gap-3 px-3 md:px-6 lg:px-12 py-2 lg:py-3`}>
             <Link className="flex h-11 w-60 md:h-20 md:w-[422px]" href="/">
                 <Image 	
                     style={{objectFit: "contain", objectPosition: "left"}} 
@@ -31,7 +31,7 @@ export function Header(){
                     width={422} alt="" 
                 />
             </Link>
-            <div className="flex items-center gap-2 md:gap-8">
+            <div className={`flex items-center gap-2 md:gap-8 border`}>
                 {
                     session ? (
                         <div className="relative flex items-center">
