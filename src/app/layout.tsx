@@ -23,8 +23,8 @@ export default async function RootLayout({
 
   return (
     <html lang="pt-BR">
-      <body className={`${poppins.className} overflow-x-hidden flex items-center justify-center bg-background`} >
-        <div className="max-w-1920 w-full">
+      <body className={`${poppins.className} overflow-x-hidden flex items-center justify-center bg-[#862000]`} >
+        <div className="max-w-1920 w-full bg-background">
           <SessionProvider session={session}>
             <CartContextProvider>
               <Header />
