@@ -29,7 +29,7 @@ export default function Login(){
     },[])
 
     return (
-        <div className="flex items-end justify-center h-screen">
+        <div className="relative flex justify-center xl:justify-start h-screen">
            <div className="flex items-center justify-center h-full px-5 xl:w-1/2">
                 <div className="flex flex-col items-center justify-center mt-[-52px]">
                     <strong className="font-bold text-5xl text-primary mb-12 ">Login</strong>
@@ -50,12 +50,12 @@ export default function Login(){
                 </div>
            </div> 
            
-           <div className="relative hidden h-screen w-1/2 xl:flex items-center justify-center">
+           <div className="absolute right-0 top-[-100px] bottom-0 z-50  hidden w-1/2 xl:flex items-center justify-center">
             <div className="absolute right-1/2 translate-x-1/2 bottom-1/2 translate-y-1/2 w-11/12 text-center z-10 2xl:max-w-[543px]">
                 <span className={`text-background block w-full text-7xl mb-12 ${italianno.className}`}>Para desfrutar das melhores pizzas do mundo!</span>
                 <strong className="leading-normal font-semibold text-background text-5xl mt-32">Faça o seu Login ou crie uma conta</strong>
             </div>
-            <Image src={bgImg.src} alt="" fill  />
+            <Image className="object-cover" src={bgImg.src} alt="" fill  />
            </div> 
         </div>
     )
