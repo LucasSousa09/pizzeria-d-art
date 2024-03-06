@@ -19,6 +19,7 @@ import { InputBox } from "./InputBox";
 import { Separator } from '../Separator';
 import { InputRadio } from './InputRadio';
 import { CartPizza } from '../Cart/CartPizza';
+import Link from 'next/link';
 
 const CheckoutSchema = zod.object({
     street: zod.string()
@@ -137,8 +138,11 @@ export function FormCheckout({checkoutProps}: FormCheckoutProps){
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="px-5 lg:px-0 2xl:grid 2xl:grid-cols-[minmax(0,1fr)_440px] 2xl:grid-rows-[440px_240px] 2xl:grid-flow-col 2xl:gap-x-16 max-w-full 2xl:max-w-[1416px]" >
             <div className="mb-6 2xl:mb-0">
-                <strong className="flex font-medium text-2xl text-primary mb-2 leading-normal">Endereço</strong>
-                <div className="bg-primary rounded max-w-[916px] pt-1 sm:pt-[-4px] px-7 pb-7 sm:grid sm:grid-cols-2 sm:grid-rows-3 sm:grid-flow-col sm:gap-x-6 md:gap-x-12 mb-4">
+                <div className="flex justify-between items-center">
+                    <strong className="flex font-medium text-2xl text-primary mb-2 leading-normal">Endereço</strong>
+                    <Link href="/profile" className="bg-primary text-white font-medium p-2 rounded hover:opacity-70 transition-opacity ease-linear">Alterar endereço</Link>
+                </div>
+                <div className="bg-primary rounded max-w-[916px] lg: px-7 py-7 sm:grid sm:grid-cols-2 sm:grid-rows-3 sm:grid-flow-col sm:gap-x-6 md:gap-x-12 mb-4">
                     <InputBox>
                         <Label theme='primary' idFor="street" text='Rua' />
                         <Input disabled theme="primary" id="street" {...register("street")} />
@@ -184,8 +188,8 @@ export function FormCheckout({checkoutProps}: FormCheckoutProps){
             </div>
 
             <div className="mb-6 2xl:mb-0">
-                <strong className="flex font-medium text-2xl text-primary mb-2 leading-normal">Meios de pagamento</strong>
-                <div className='max-w-[917px] grid grid-cols-2 gap-5 bg-primary p-7 rounded'>
+                <strong className="flex font-medium text-2xl text-primary lg:mt-6 mb-2 leading-normal">Meios de pagamento</strong>
+                <div className='max-w-[917px] grid grid-cols-2 gap-4 bg-primary p-7 rounded'>
                     <InputRadio  id='money'  {...register('paymentMethod')} isActive={isActive} setIsActive={setIsActive}>
                         <Money size={32}/>
                         Dinheiro

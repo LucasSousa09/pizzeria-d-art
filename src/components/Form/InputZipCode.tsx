@@ -21,7 +21,7 @@ export const InputZipCode = forwardRef<HTMLInputElement, InputProps>(({id, name,
             onChange={onChange} 
             type={type}
             inputRef={ref} 
-            className="block p-2 text-primary w-full bg-background border border-primary rounded h-12 focus:outline-primary"
+            className="block p-2 text-primary w-full bg-background border border-primary rounded h-10 lg:h-12 focus:outline-primary"
         />
     )
 })

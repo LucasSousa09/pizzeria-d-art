@@ -7,7 +7,7 @@ type InputProps = {
     onBlur: ChangeHandler,
     name: string,
 
-    type?: 'text' | 'number',
+    type?: 'text' | 'number' | 'password',
     theme?: 'default' | 'primary'
 }
 
@@ -31,7 +31,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
                 type={type} 
                 ref={ref}
                 {...rest}
-                className={`peer disabled:cursor-not-allowed disabled:filter disabled:brightness-75 block p-2 ${theme === 'default' ? 'text-primary' : 'text-background'} w-full border ${theme === 'default' ? 'border-primary' : 'border-background'} bg-transparent rounded h-12 ${theme === 'default' ? 'focus:outline-primary' : 'focus:outline-background'}`}
+                className={`peer disabled:cursor-not-allowed disabled:filter disabled:brightness-75 block p-2 ${theme === 'default' ? 'text-primary' : 'text-background'} w-full border ${theme === 'default' ? 'border-primary' : 'border-background'} bg-transparent rounded h-10 lg:h-12 ${theme === 'default' ? 'focus:outline-primary' : 'focus:outline-background'}`}
             />
             {
                 id !== 'email' && (

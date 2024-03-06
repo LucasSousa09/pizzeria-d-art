@@ -13,7 +13,6 @@ import { Separator } from "./Separator";
 
 import logoImg from "../assets/Logo.png"
 
-
 export function Header(){
     const [ openSettings, setOpenSettings ] = useState(false)
     const { data: session } = useSession()
@@ -23,15 +22,16 @@ export function Header(){
 
     return (
         <header className={`fixed bg-background max-w-1920 mx-auto top-0 left-0 right-0 z-50 flex items-center justify-between gap-3 px-3 md:px-6 lg:px-12 py-2 lg:py-3`}>
-            <Link className="flex h-11 w-60 md:h-20 md:w-[422px]" href="/">
+            <Link className="flex h-11 w-36 sm:w-60 md:h-20 md:w-[360px]" href="/">
                 <Image 	
                     style={{objectFit: "contain", objectPosition: "left"}} 
                     src={logoImg.src} 
                     height={80} 
-                    width={422} alt="" 
+                    width={360} alt=""
+                    priority 
                 />
             </Link>
-            <div className={`flex items-center gap-2 md:gap-8 border`}>
+            <div className={`flex items-center gap-2 md:gap-8`}>
                 {
                     session ? (
                         <div className="relative flex items-center">
@@ -62,21 +62,30 @@ export function Header(){
                             ) : null}
                         </div>
                     ) : pathname === '/login' ? null : (
-                        <Link 
-                            className="hover:brightness-90 active:scale-95 font-medium text-base md:text-2xl text-white bg-primary rounded-full px-3 md:px-[18px] py-2 md:py-3" href='login'
-                        >
-                            Login
-                        </Link>
+                        <div>
+                            <Link 
+                                href='/login'
+                                className="hover:brightness-90 active:scale-95 font-medium text-xs sm:text-base lg:text-2xl text-white bg-primary rounded-full rounded-r-none px-2 md:px-[18px] py-2 md:py-3 mr-[2px]"
+                                >
+                                Login
+                            </Link>
+                            <Link 
+                                href='/register'
+                                className="hover:brightness-90 active:scale-95 font-medium text-xs sm:text-base lg:text-2xl text-white bg-primary rounded-full rounded-l-none px-2 md:px-[18px] py-2 md:py-3"
+                                >
+                                Crie uma conta
+                            </Link>
+                        </div>
                     )
                 }
                 <button  
                     onClick={() => setOpenCart(true)}
-                    className="relative"
+                    className="relative hover:brightness-90"
                 >
                     {
                         pathname === '/login' || pathname === '/checkout' ? null :
                         (<>
-                            <ShoppingCart className="text-primary h-11 w-11 md:h-14 md:w-14" weight="fill" height={57} width={57} />
+                            <ShoppingCart className="text-primary h-6 w-6 sm:h-9 sm:w-9 md:h-14 md:w-14" weight="fill" />
                             {
                                 cart.length > 0 ?
                                 <div className="absolute top-[-4px] right-[-2px] bg-primary text-background h-6 w-6 rounded-full outline outline-background font-medium flex items-center justify-center">
