@@ -16,7 +16,7 @@ import bgImg from '../../assets/lucian-alexe.png'
 import { italianno } from '../fonts'
 
 export default function Success(){
-    const session = useSession()
+    const {data: session} = useSession()
     const searchParams = useSearchParams()
     const { clearCart } = useContext(CartContext)
 
@@ -41,9 +41,10 @@ export default function Success(){
     }
 
     useEffect(() => {
-        if(session.data?.user?.name === undefined){
+        if(session?.user?.name === undefined){
             redirect('/login')
         }
+        
         clearCart()
     },[])
 
@@ -60,13 +61,13 @@ export default function Success(){
     },[])
 
     return (
-        <div className="relative flex items-end min-h-[calc(100vh-60px)] mt-[60px] md:mt-[104px] w-screen">
+        <div className="relative flex items-end min-h-[calc(100vh-60px)] mt-[60px] md:mt-[104px]">
             <Image className="w-full h-[calc(100vh-60px)] object-cover" src={bgImg} alt="Delivery man in a motorcicle" />
             <div 
                 className={`absolute top-0 left-0 right-0 pt-16 xl:pt-6 px-5 xl:px-0 xl:bottom-0 xl:right-1/2 bg-overlay flex flex-col items-center justify-center xl:w-1/2 h-1/2 xl:h-full ${italianno.className} text-white`}
             >
                     <p className={`xl:mt-[-52px] text-4xl sm:text-6xl xl:text-7xl text-center leading-tight`}>
-                        Parabéns {session.data?.user?.name}, seu pedido foi recebido!
+                        Parabéns {session?.user?.name}, seu pedido foi recebido!
                     </p>
                     <p className={`text-4xl sm:text-6xl xl:text-7xl text-center leading-tight`}>
                         A pizzeria D'arte agradece !
