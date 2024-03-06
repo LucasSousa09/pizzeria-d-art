@@ -1,6 +1,6 @@
 import { prisma } from "../../../lib/prisma"
 
-export async function POST(req: Request) {
+export async function PATCH(req: Request) {
     const body = await req.json()
 
     try{
@@ -11,22 +11,26 @@ export async function POST(req: Request) {
             data: {
                 cpf: body.cpf,
                 phone: body.phone,
-                street: body.street,
-                district: body.district,
-                zipCode: body.zipCode,
-                houseNumber: body.houseNumber,
-                complement: body.complement,
-                city: body.city,
-                state: body.state,
-                reference: body.reference 
-              }
+                username: body.username,
+                mainAddress: body.mainAddress, 
+            }
         })
-
         
-    }
-    catch(err){
-        return Response.json({error: err})
+        return new Response(null, {
+            status: 204
+        })
     }
 
-    return Response.json({message: 'Atualização realizada com sucesso!'})
+    catch(err: any){
+        if(err.code === "P2002"){
+            return new Response("This CPF is already registered", {
+                status: 400
+            })
+        }
+
+        return new Response(JSON.stringify(err), {
+            status: 500
+        })
+    }
+
 }
