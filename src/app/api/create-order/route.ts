@@ -20,8 +20,6 @@ export async function POST(req: Request) {
 
         const totalPrice = body.cart.reduce((acc, cur) => acc + (cur.price * cur.quantity),0)
 
-        console.log(JSON.stringify(body.cart))
-
         const orderId = await prisma.order.create({
             data: {
                 pizzas: JSON.stringify(body.cart),
