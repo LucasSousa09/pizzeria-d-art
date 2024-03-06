@@ -15,19 +15,32 @@ model User {
   email    String  @unique
   username String
   avatar   String?
+  cpf      String? @unique
+  phone    String?
+  password String?
 
-  cpf         String?
-  phone       String?
-  street      String?
-  district    String?
-  zipCode     String?
-  houseNumber Int?
-  complement  String?
-  city        String?
-  state       String?
-  reference   String?
+  mainAddress String?
+
+  addresses Address[]
 
   orders Order[]
+}
+
+model Address {
+  id String @id @default(cuid())
+
+  street      String
+  district    String
+  zipCode     String
+  houseNumber Int
+  complement  String
+  city        String
+  state       String
+  reference   String?
+
+  userEmail   String
+  address     User    @relation(fields: [userEmail], references: [email])
+  mainAddress Boolean
 }
 
 model Pizza {
