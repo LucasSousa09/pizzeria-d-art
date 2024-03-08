@@ -4,8 +4,6 @@ import CredentialsProvider  from "next-auth/providers/credentials"
 
 import NextAuth from "next-auth/next";
 import { NextAuthOptions } from "next-auth";
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-
 
 import bcrypt from 'bcrypt'
 
@@ -56,7 +54,6 @@ const authOptions: NextAuthOptions = {
             }
         })    
     ],
-    adapter: PrismaAdapter(prisma),
     callbacks: {
         async signIn({ user }) {
             const { name, email, image } = user
@@ -99,7 +96,6 @@ const authOptions: NextAuthOptions = {
             }
         },
         jwt: async ({token, user}) => {
-            console.log(user)
             if(user && !user.name){
                 token.name = user.username
                 token.email = user.email
