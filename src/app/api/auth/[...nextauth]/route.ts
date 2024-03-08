@@ -99,6 +99,7 @@ const authOptions: NextAuthOptions = {
             }
         },
         jwt: async ({token, user}) => {
+            console.log(user)
             if(user && !user.name){
                 token.name = user.username
                 token.email = user.email
