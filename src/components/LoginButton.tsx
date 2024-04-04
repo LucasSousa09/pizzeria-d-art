@@ -25,11 +25,11 @@ export function LoginButton({ children, isAwaitingResponse, loginProvider, callb
             onClick={handleLogin} 
             className={ 
                 "group flex items-center justify-center gap-3 sm:gap-5 w-full rounded " +
-                "mt-8 mb-8 py-3 sm:py-4 px-5 " +
-                `text-lg sm:text-xl lg:text-2xl  font-medium text-background bg-${color} ` +
+                "mb-8 py-3 sm:py-4 px-5 " +
+                `text-lg sm:text-xl lg:text-2xl  font-medium text-background ${color === "primary" ? "bg-primary" : "bg-[#333]"} ` +
                 "hover:opacity-75 transition-opacity ease-linear active:scale-95 " +
                 "disabled:brightness-75 disabled:cursor-not-allowed disabled:hover:opacity-100 " +
-                `${loginProvider !== "credentials" && "mt-0"}`
+                `${loginProvider !== "credentials" ? "mt-0" : "mt-8"}`
             }
         >   
             {children}
