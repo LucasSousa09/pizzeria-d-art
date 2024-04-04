@@ -1,21 +1,22 @@
 'use client'
 
-import * as zod from 'zod'
-import Image from "next/image";
+import * as zod from 'zod';
+import Link from 'next/link';
 import { toast } from "react-toastify";
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { signIn } from "next-auth/react";
-import { useEffect } from "react";
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { GoogleLogo, GithubLogo } from '@phosphor-icons/react/dist/ssr';
+
+import { api } from '@/lib/axios';
 
 import { Label } from "@/components/Form/Label";
 import { Input } from "@/components/Form/Input";
 import { InputBox } from "@/components/Form/InputBox";
 import { Separator } from '@/components/Separator';
-import Link from 'next/link';
-import { api } from '@/lib/axios';
-import { useRouter } from 'next/navigation';
+import { LoginButton } from '@/components/LoginButton';
+import { SpinnerGap } from '@phosphor-icons/react';
 
 const FormInputsSchema = zod.object({
     username: zod.string()
@@ -38,6 +39,7 @@ const FormInputsSchema = zod.object({
 type FormInputs = zod.infer<typeof FormInputsSchema>
 
 export default function Register(){
+    const [isAwaitingResponse, setIsAwaitingResponse] = useState<string | null>(null)
     const router = useRouter()
 
     const { 
@@ -55,6 +57,7 @@ export default function Register(){
     },[errors])
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+        setIsAwaitingResponse("credentials")
         try{
             const res = await api.post('/register', {
                 email: data.email,
@@ -66,12 +69,17 @@ export default function Register(){
                 toast.success('Usuário criado com sucesso! Faça o Login para continuar')
                 router.push('/login')
             }
+
         }
         catch(err: any){
             if(err.response.data === "This email is already registered"){
                 toast.error('Esse email já está cadastrado')
             }
+            else{
+                toast.error("Ocorreu um erro, Por favor tente novamente mais tarde!")
+            }
         }
+        setIsAwaitingResponse(null)
     }
 
     return (
@@ -104,7 +112,15 @@ export default function Register(){
                             <Input id="repeat-password" type='password' {...register('repeat-password')} />
                         </InputBox>
 
-                        <button className="hover:opacity-75 transition-opacity ease-linear active:scale-95 w-full flex items-center justify-center gap-3 sm:gap-5 py-3 sm:py-4 px-5 text-lg sm:text-xl lg:text-2xl font-bold text-background rounded bg-primary mb-8">Criar conta</button>
+                        <LoginButton
+                            loginProvider='credentials'
+                            isAwaitingResponse={isAwaitingResponse}
+                            setIsAwaitingResponse={setIsAwaitingResponse}
+                        >
+                            {
+                                isAwaitingResponse === "credentials" ? <SpinnerGap className=' group-disabled:animate-spin' /> : "Criar conta"
+                            }
+                        </LoginButton>
                     </form>
                 </div>
            </div> 
@@ -113,7 +129,7 @@ export default function Register(){
                 <strong className="font-bold text-3xl sm:text-4xl mb-12 text-primary">Já tem uma conta?</strong>
                                
                 <div className="w-full max-w-[500px]">
-                    <Link href={'/login'} className="hover:opacity-75 transition-opacity ease-linear active:scale-95 w-full flex items-center justify-center gap-3 sm:gap-5 py-3 sm:py-4 px-5 text-lg sm:text-xl lg:text-2xl font-bold text-background rounded bg-primary mb-8">Faça o login</Link>
+                    <Link href={'/login'} className="hover:opacity-75 transition-opacity ease-linear active:scale-95 w-full flex items-center justify-center gap-3 sm:gap-5 py-3 sm:py-4 px-5 text-lg sm:text-xl lg:text-2xl font-medium text-background rounded bg-primary mb-8">Faça o login</Link>
 
                     <div className="flex items-center mb-8">
                         <Separator backgroundColor='bg-primary'/>
@@ -123,32 +139,43 @@ export default function Register(){
 
 
                     {/* Create an account or Login with Google */}
-                    <button
-                        onClick={() => signIn('google', {callbackUrl: '/'})} 
-                        className="hover:opacity-75 transition-opacity ease-linear active:scale-95 w-full flex justify-center items-center gap-3 sm:gap-5 py-3 sm:py-6 px-5 text-lg sm:text-xl lg:text-2xl sm:leading-none font-medium text-background rounded bg-primary mb-8"
+                    <LoginButton
+                        loginProvider='google'
+                        isAwaitingResponse={isAwaitingResponse}
+                        setIsAwaitingResponse={setIsAwaitingResponse}
+                    >   
+                        {
+                            isAwaitingResponse === "google" ? ( 
+                                <SpinnerGap className=' group-disabled:animate-spin' /> 
+                                ) : (
+                                <>
+                                    <GoogleLogo weight="bold"  />
+                                    Continue com com Google 
+                                </>
+                            )
+                        }
+                    </LoginButton>
+
+                    <LoginButton
+                        loginProvider='github'
+                        color='[#333]'
+                        isAwaitingResponse={isAwaitingResponse}
+                        setIsAwaitingResponse={setIsAwaitingResponse}
                     >
-                        <GoogleLogo weight='bold' />
-                        Continue com Google 
-                    </button>
-                    <button 
-                        onClick={() => signIn('github', {callbackUrl: '/'})} 
-                        className="hover:opacity-75 transition-opacity ease-linear active:scale-95 w-full flex justify-center items-center gap-3 sm:gap-5 py-3 sm:py-6 px-5 text-lg sm:text-xl lg:text-2xl sm:leading-none font-medium text-background rounded bg-[#333]"
-                    >
-                        <GithubLogo weight="bold" />
-                        Continue com Github 
-                    </button>
+                        {
+                            isAwaitingResponse === "github" ? (
+                                <SpinnerGap className=' group-disabled:animate-spin' />
+                            ): (
+                                <>
+                                    <GithubLogo  weight="bold" /> 
+                                    Continue com com Github 
+                                </>
+                            ) 
+                        }
+                    </LoginButton>
 
                 </div>
             </div>
-
-           {/* Page description Text */}
-           {/* <div className="absolute right-0 top-[-100px] bottom-0 z-50  hidden w-1/2 xl:flex items-center justify-center">
-            <div className="absolute right-1/2 translate-x-1/2 bottom-1/2 translate-y-1/2 w-11/12 text-center z-10 2xl:max-w-[543px]">
-                <span className={`text-background block w-full text-7xl mb-12 ${italianno.className}`}>Para desfrutar das melhores pizzas do mundo!</span>
-                <strong className="leading-normal font-semibold text-background text-5xl mt-32">Crie uma conta ou faça login</strong>
-            </div>
-            <Image className="object-cover" src={bgImg.src} alt="" fill  />
-           </div>  */}
         </div>
     )
 }

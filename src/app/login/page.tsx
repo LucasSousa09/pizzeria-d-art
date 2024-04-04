@@ -1,13 +1,14 @@
 'use client'
 
 import * as zod from 'zod'
+import Link from 'next/link';
 import Image from "next/image";
 import { toast } from "react-toastify";
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { useRouter, useSearchParams } from "next/navigation";
 import { GoogleLogo, GithubLogo } from '@phosphor-icons/react/dist/ssr';
 
 import bgImg from '../../assets/abbie-tanner.png';
@@ -18,7 +19,8 @@ import { Label } from "@/components/Form/Label";
 import { Input } from "@/components/Form/Input";
 import { InputBox } from "@/components/Form/InputBox";
 import { Separator } from '@/components/Separator';
-import Link from 'next/link';
+import { SpinnerGap } from '@phosphor-icons/react';
+import { LoginButton } from '@/components/LoginButton';
 
 const FormInputsSchema = zod.object({
     email: zod.string()
@@ -39,7 +41,7 @@ export default function Login(){
     const error = searchParams.get('error')
 
     const [ callbackUrl, setCallbackUrl ] = useState('/')
-    const [awaitingResponse, setAwaitingResponse] = useState(false)
+    const [isAwaitingResponse, setIsAwaitingResponse] = useState<string | null>(null)
 
     const { 
             register,
@@ -67,7 +69,7 @@ export default function Login(){
     },[errors])
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-            setAwaitingResponse(true)
+            setIsAwaitingResponse("credentials")
 
             const res = await signIn('credentials', {
                 email: data.email,
@@ -84,13 +86,13 @@ export default function Login(){
                 router.push('/')
             }
 
-            setAwaitingResponse(false)
+            setIsAwaitingResponse(null)
     }
 
     return (
         <div className="relative flex items-center justify-center xl:justify-start mt-12 min-h-screen">
            <div className="flex items-center justify-center h-full px-5 xl:w-1/2">
-                <div className="flex flex-col items-center justify-center mt-[-52px]">
+                <div className="flex flex-col items-center justify-center mt-[-52px] w-full max-w-[460px]">
                     <strong className="font-bold text-3xl md:text-4xl lg:text-5xl text-primary mb-6 sm:mb-8 md:mb-12 ">Login</strong>
                     
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col  w-full mb-0">
@@ -104,11 +106,16 @@ export default function Login(){
                             <Input id="password" type='password' {...register('password')} />
                         </InputBox>
 
-                        <button 
-                            disabled={awaitingResponse}
-                            className="disabled:brightness-75 disabled:cursor-not-allowed hover:opacity-75 transition-opacity ease-linear active:scale-95 mt-8 w-full flex items-center justify-center gap-3 sm:gap-5 py-3 sm:py-4 px-5 text-lg sm:text-2xl font-bold text-background rounded bg-primary mb-8">
-                                Entrar
-                            </button>
+                        <LoginButton
+                            loginProvider='credentials'
+                            isAwaitingResponse={isAwaitingResponse}
+                            setIsAwaitingResponse={setIsAwaitingResponse}
+                        >   
+
+                            {
+                                isAwaitingResponse === "credentials" ? <SpinnerGap className=' group-disabled:animate-spin' /> : "Entrar"
+                            }
+                        </LoginButton>
                     </form>
 
                     <div className="flex w-full items-center mb-8">
@@ -117,20 +124,42 @@ export default function Login(){
                         <Separator backgroundColor='bg-primary' />
                     </div>
                     
-                    <button
-                        onClick={() => signIn('google', {callbackUrl})} 
-                        className="hover:opacity-75 transition-opacity ease-linear active:scale-95 w-full flex items-center gap-3 sm:gap-5 py-3 sm:py-6 px-5 text-lg sm:text-2xl sm:leading-none font-medium text-background rounded bg-primary mb-8"
+                    <LoginButton
+                        loginProvider='google'
+                        callbackUrl={callbackUrl}
+                        isAwaitingResponse={isAwaitingResponse}
+                        setIsAwaitingResponse={setIsAwaitingResponse}
+                    >   
+                        {
+                            isAwaitingResponse === "google" ? ( 
+                                <SpinnerGap className=' group-disabled:animate-spin' /> 
+                                ) : (
+                                <>
+                                    <GoogleLogo weight="bold"  />
+                                    Faça o seu login com Google 
+                                </>
+                            )
+                        }
+                    </LoginButton>
+
+                    <LoginButton
+                        loginProvider='github'
+                        callbackUrl={callbackUrl}
+                        color='[#333]'
+                        isAwaitingResponse={isAwaitingResponse}
+                        setIsAwaitingResponse={setIsAwaitingResponse}
                     >
-                        <GoogleLogo weight="bold"  />
-                        Faça o seu login com Google 
-                    </button>
-                    <button 
-                        onClick={() => signIn('github', {callbackUrl})} 
-                        className="hover:opacity-75 transition-opacity ease-linear active:scale-95 w-full flex items-center gap-3 sm:gap-5 py-3 sm:py-6 px-5 text-lg sm:text-2xl sm:leading-none font-medium text-background rounded bg-[#333]"
-                    >
-                        <GithubLogo  weight="bold" /> 
-                        Faça o seu login com Github 
-                    </button>
+                        {
+                            isAwaitingResponse === "github"?(
+                                <SpinnerGap className=' group-disabled:animate-spin' />
+                            ): (
+                                <>
+                                    <GithubLogo  weight="bold" /> 
+                                    Faça o seu login com Github 
+                                </>
+                            ) 
+                        }
+                    </LoginButton>
                 </div>
            </div> 
            
