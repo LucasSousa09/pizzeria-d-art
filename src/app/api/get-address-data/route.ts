@@ -20,6 +20,12 @@ export async function POST(req: Request) {
             }
         })
 
+        if(addressData === null){
+            return new Response('Address not found', {
+                status: 404
+            })
+        }
+
         return new Response(JSON.stringify(addressData), {
             status: 200
         })

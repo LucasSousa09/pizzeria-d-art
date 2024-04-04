@@ -36,6 +36,13 @@ const authOptions: NextAuthOptions = {
                 const user = await prisma.user.findUnique({
                     where: {
                         email: credentials?.email
+                    },
+                    select: {
+                        id: true,
+                        email: true,
+                        avatar: true,
+                        username: true,
+                        password: true
                     }
                 })
 
@@ -59,12 +66,14 @@ const authOptions: NextAuthOptions = {
             const { name, email, image } = user
 
             try {
+                //Check if the user exists by email
                 const emailFound = await prisma.user.findUnique({
                     where: {
                         email: email || ''
                     }
                 })
 
+                //If user avatar is undened but have an user image by logging in google or github save as the avatar image on the db
                 if(user.avatar === undefined && emailFound && image && email && name){
                     await prisma.user.update({
                         where: {
@@ -76,6 +85,7 @@ const authOptions: NextAuthOptions = {
                     })                                       
                 }
 
+                //If user not exists create user on db
                 if(emailFound === null){
                     if(email && name){
                         await prisma.user.create({
