@@ -11,7 +11,7 @@ import { CartContext } from "@/contexts/CartContextProvider";
 
 import { api } from "@/lib/axios";
 
-import bgImg from '../../assets/lucian-alexe.png'
+import bgImg from '../../assets/lucian-alexe.webp'
 
 import { italianno } from '../fonts'
 

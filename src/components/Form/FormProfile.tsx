@@ -1,6 +1,7 @@
 'use client'
 
 import * as zod from 'zod'
+import Image from 'next/image'
 import { toast } from 'react-toastify'
 import { useEffect, useState, } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -128,7 +129,7 @@ export function FormProfile({
                 {/* Avatar Image */}
                 {
                     avatar ? (
-                        <img src={avatar} alt="" className="h-12 w-12 rounded-full" />
+                        <Image src={avatar} alt="" className="h-12 w-12 rounded-full" />
                     ) : (
                         <UserCircle weight="bold" className="h-12 w-12" />
                     )

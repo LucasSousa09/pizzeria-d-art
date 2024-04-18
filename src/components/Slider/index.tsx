@@ -6,10 +6,10 @@ import { Pagination, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination';
 
-import bannerImg from '../../assets/ardalan-hamedani.png'
-import bannerImg1 from '../../assets/ivan-torres-unsplash.jpg'
-import bannerImg2 from '../../assets/pranjall-kumar-unsplash.jpg'
-import bannerImg3 from '../../assets/shayan-ramesht-unsplash.jpg'
+import bannerImg from '../../assets/ardalan-hamedani.webp'
+import bannerImg1 from '../../assets/ivan-torres-unsplash.webp'
+import bannerImg2 from '../../assets/pranjall-kumar-unsplash.webp'
+import bannerImg3 from '../../assets/shayan-ramesht-unsplash.webp'
 
 import { SliderSlide } from './SliderSlide';
 

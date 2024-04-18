@@ -11,7 +11,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { useRouter, useSearchParams } from "next/navigation";
 import { GoogleLogo, GithubLogo } from '@phosphor-icons/react/dist/ssr';
 
-import bgImg from '../../assets/abbie-tanner.png';
+import bgImg from '../../assets/abbie-tanner.webp';
 
 import { italianno } from '../fonts';
 
