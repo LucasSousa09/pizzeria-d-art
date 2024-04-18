@@ -12,6 +12,15 @@ import { Footer } from '../components/Footer'
 import SessionProvider from '../components/SessionProvider'
 
 import './globals.css'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: {
+    default: "Pizzaria D'art",
+    template: "%s | Pizzaria D'art"
+  },
+  description: "A pizzaria dos seus sonhos agora on-line!"
+}
 
 export default async function RootLayout({
   children,
